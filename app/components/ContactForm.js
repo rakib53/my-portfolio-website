@@ -28,7 +28,7 @@ export default function ContactForm() {
                 <p className={styles.contactLine}>+8801980551313</p>
                 <span className={styles.getInText}>
                   <Link
-                    href={"https://wa.me/01980551313"}
+                    href={"https://wa.me/+8801980551313"}
                     target=" "
                     className={styles.getInText}
                   >

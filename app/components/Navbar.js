@@ -1,3 +1,5 @@
+"use client";
+
 import { useEffect, useRef, useState } from "react";
 import styles from "../styles/Navbar.module.css";
 import NavLogo from "./NavLogo";

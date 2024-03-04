@@ -4,7 +4,7 @@
     "title": "Task management applications",
     "description": "An advanced task management application for the user who wants to track their daily routine and want to do daily workouts in a more organized way to for the dailyFlow web application.",
     "githubLink": "https://github.com/rakib53/dailyflow-todo-application",
-    "liveSiteLink": "https://daily-flow-gilt.vercel.app/",
+    "liveSiteLink": "https://daily-flow-pi.vercel.app/",
     "technologies": ["reactjs", "nodejs", "redux", "expressjs", "mongodb"],
     "coverPhoto": "/Projects/todo.png"
   },

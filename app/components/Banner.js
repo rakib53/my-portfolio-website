@@ -2,7 +2,7 @@ import Link from "next/link";
 import { FaGithub } from "react-icons/fa";
 import { HiOutlineArrowSmDown } from "react-icons/hi";
 import { ImFacebook, ImGithub, ImLinkedin, ImTwitter } from "react-icons/im";
-import styles from "./../styles/Banner.module.css";
+import styles from "../styles/Banner.module.css";
 
 const Banner = () => {
   return (
@@ -15,10 +15,6 @@ const Banner = () => {
         </h1>
         <div className={styles.bannerBtnGroup}>
           <button className={styles.letsTalk}>Let's talk</button>
-          <button className={styles.github}>
-            <FaGithub className={styles.githubIcon} />
-            Github
-          </button>
         </div>
         <div className={styles.socialIconWrapper}>
           <Link href={"https://www.facebook.com/mrrakibrs/"} target=" ">
