@@ -59,7 +59,7 @@ const Navbar = () => {
               </a>
             </li>
             <li className={styles.navbarItem}>
-              <a href="" className={styles.navbarLink}>
+              <a href="#skills" className={styles.navbarLink}>
                 About me
               </a>
             </li>
