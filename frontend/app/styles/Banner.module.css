@@ -1,0 +1,195 @@
+.bannerContainer {
+  max-width: 1140px;
+  width: 100%;
+  height: 760px;
+  margin: 0 auto;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.bannerWrapper {
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.bannerInfo {
+  max-width: 600px;
+  width: 100%;
+}
+
+.bannerImage {
+  background: url("../../public/Rakib.jpg");
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: cover;
+  width: 400px;
+  height: 400px;
+  box-shadow: inset 0 0 0 9px #f6c7094a;
+  justify-self: center;
+  animation: profile__animate 8s ease-in-out infinite 1s;
+}
+
+@keyframes profile__animate {
+  0% {
+    border-radius: 60% 40% 30% 70%/60% 30% 70% 40%;
+  }
+  50% {
+    border-radius: 30% 60% 70% 40%/50% 60% 30%;
+  }
+  100% {
+    border-radius: 60% 40% 30% 70%/60% 30% 70% 40%;
+  }
+}
+
+.myName {
+  font-size: 16px;
+  color: var(--primary-color);
+  font-weight: 600;
+  margin-bottom: 5px;
+}
+
+.bannerTitle {
+  color: #fff;
+  font-size: 40px;
+  margin-bottom: 20px;
+}
+
+.full_stack {
+  color: var(--primary-color);
+}
+
+.bannerBtnGroup {
+  display: flex;
+  align-items: stretch;
+  gap: 10px;
+}
+
+.letsTalk {
+  padding: 10px 20px;
+  outline: none;
+  border: none;
+  font-size: 16px;
+  font-weight: 500;
+  border-radius: 4px;
+  font-family: var(--font-monserrat);
+  background-color: var(--primary-color);
+  border: 2px solid transparent;
+  transition: all 0.3s ease-in;
+}
+
+.letsTalk:hover {
+  cursor: pointer;
+  color: #fff;
+  background-color: #112240;
+  border: 2px solid var(--primary-color);
+  transition: all 0.3s ease-in;
+}
+
+.github {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  padding: 10px 20px;
+  outline: none;
+  border: none;
+  font-size: 16px;
+  border-radius: 4px;
+  font-weight: 500;
+  font-family: var(--font-monserrat);
+}
+
+.githubIcon {
+  font-size: 20px;
+}
+
+.github {
+  cursor: pointer;
+}
+
+.socialIconWrapper {
+  margin: 15px 0;
+}
+
+.socialIcon {
+  color: #fff;
+  font-size: 40px;
+  margin: 0 5px;
+  border-radius: 50px;
+  padding: 8px;
+  border: 2px solid var(--primary-color);
+  transition: all 0.3s ease-in-out;
+}
+
+.socialIcon:hover {
+  background-color: var(--primary-color);
+  border: 2px solid #fff;
+  cursor: pointer;
+  transition: all 0.3s ease-in-out;
+}
+
+@media screen and (max-width: 1224px) {
+  .bannerContainer {
+    flex-direction: column-reverse;
+    height: auto;
+    padding: 50px 0;
+    gap: 50px;
+  }
+
+  .bannerImage {
+    width: 300px;
+    height: 300px;
+  }
+
+  .bannerInfo {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .myName {
+    text-align: center !important;
+  }
+
+  .bannerTitle {
+    color: #fff;
+    font-size: 34px;
+    margin-bottom: 20px;
+    text-align: center;
+    padding: 0 10px;
+  }
+}
+
+@media screen and (max-width: 768px) {
+  .bannerContainer {
+    flex-direction: column-reverse;
+    height: auto;
+    padding: 50px 0;
+    gap: 50px;
+  }
+
+  .bannerImage {
+    width: 300px;
+    height: 300px;
+  }
+
+  .bannerInfo {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .myName {
+    text-align: center !important;
+  }
+
+  .bannerTitle {
+    color: #fff;
+    font-size: 34px;
+    margin-bottom: 20px;
+    text-align: center;
+    padding: 0 10px;
+  }
+}

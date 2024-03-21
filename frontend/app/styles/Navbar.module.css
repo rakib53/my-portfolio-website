@@ -1,0 +1,271 @@
+.parentNavbar {
+  padding: 0 15px;
+}
+
+.navbarWrapper {
+  max-width: 1440px;
+  width: 100%;
+  margin: 0 auto;
+  height: 60px;
+  border-radius: 50px;
+  padding: 10px 40px;
+  background-color: var(--navbar-bg);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  font-family: var(--font-monserrat);
+  overflow: hidden;
+}
+
+.navbarList {
+  display: flex;
+  list-style-type: none;
+}
+
+.navbarItem {
+  padding: 0 10px;
+}
+
+.navbarLink {
+  color: #fff;
+  font-size: 16px;
+  font-weight: 500;
+}
+
+/* Logo CSS */
+.logoWrapper {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+}
+
+.logo {
+  width: 40px;
+  height: auto;
+}
+
+.logoText {
+  color: #fff;
+  font-size: 24px;
+}
+
+.navbarButton {
+  border-radius: 50px;
+  margin: 10% 0;
+  padding: 13px 30px;
+  color: #fff;
+  font-size: 16px;
+  font-weight: 500;
+  color: #fff;
+  background-color: var(--navbarButton-bg);
+  border: 1px solid #868181;
+  font-family: var(--font-monserrat);
+  transition: all 0.3s ease-in-out;
+}
+
+.navbarButton:hover {
+  border: 1px solid var(--primary-color);
+  transition: all 0.3s ease-in-out;
+  cursor: pointer;
+}
+
+/* Hiding Mobile menu in Desktop mode */
+.mobileMenu {
+  display: none;
+}
+
+/* Hiding Mobile Contact me menu in Desktop mode */
+.mobileContactMeBTn {
+  display: none;
+}
+
+.mobileLogo {
+  display: none;
+}
+
+@media screen and (max-width: 991px) {
+  /* Hiding Contact me button in lower resolution device */
+  .contactMeBTn {
+    display: none;
+  }
+
+  .mobileLogo {
+    display: block;
+  }
+
+  .mobileContactMeBTn {
+    display: block;
+  }
+
+  .mobileMenuWrapper {
+    position: fixed;
+    width: 100%;
+    height: 100%;
+    top: 0;
+    left: -1000px;
+    color: #fff;
+    padding: 20px 0;
+    background-color: #555353;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    justify-content: space-between;
+    transition: 0.5s;
+  }
+
+  .isMobileMenuWrapper {
+    position: fixed;
+    width: 70%;
+    height: 100%;
+    top: 0;
+    left: 0;
+    color: #fff;
+    padding: 20px 0 50px;
+    background-color: #2e2e2e;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-between;
+    transition: 0.3s;
+    box-shadow: 30px 0px 180px #000000;
+    z-index: 999999;
+  }
+
+  .navbarList {
+    display: flex;
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .navbarItem {
+    margin: 5px 0;
+    padding: 10px 20px;
+    border-radius: 5px;
+    background-color: #525252;
+    text-align: center;
+    transition: all 0.5s cubic-bezier(0.165, 0.84, 0.44, 1);
+  }
+
+  .navbarItem:hover {
+    background-color: #8a8686;
+    cursor: pointer;
+    transition: all 0.5s cubic-bezier(0.165, 0.84, 0.44, 1);
+  }
+
+  .navbarLink {
+    color: #fff;
+    font-size: 16px;
+    text-align: center;
+  }
+
+  .navbarButton {
+    margin: 0;
+  }
+
+  .mobileMenu {
+    display: flex;
+    flex-direction: column;
+    width: 30px;
+    cursor: pointer;
+  }
+
+  .menuItem {
+    display: block;
+    width: 100%;
+    margin: 3px;
+    height: 3px;
+    border-radius: 5px;
+    background-color: #fff;
+    transition: all 0.5s cubic-bezier(0.165, 0.84, 0.44, 1);
+  }
+
+  .menuXBottom {
+    display: block;
+    width: 100%;
+    margin: 3px;
+    height: 3px;
+    border-radius: 5px;
+    background-color: #fff;
+    transform: translate(-4px, -4px) rotate(135deg);
+    transition: all 0.5s cubic-bezier(0.165, 0.84, 0.44, 1);
+  }
+
+  .menuXTop {
+    display: block;
+    width: 100%;
+    margin: 3px;
+    height: 3px;
+    border-radius: 5px;
+    background-color: #fff;
+    transform: translate(-4px, 5px) rotate(45deg);
+    transition: all 0.5s cubic-bezier(0.165, 0.84, 0.44, 1);
+  }
+
+  .menuXVanish {
+    display: none;
+    transition: all 0.5s cubic-bezier(0.165, 0.84, 0.44, 1);
+  }
+}
+
+@media screen and (max-width: 500px) {
+  .navbarWrapper {
+    padding: 10px 30px;
+  }
+
+  .isMobileMenuWrapper {
+    align-items: center;
+  }
+
+  .logo {
+    width: 35px;
+    height: auto;
+  }
+
+  .logoText {
+    font-size: 20px;
+  }
+
+  /* Mobile menu expand icon under 500px */
+
+  .mobileMenu {
+    display: flex;
+    flex-direction: column;
+    width: 25px;
+  }
+
+  .menuItem {
+    margin: 2.5px;
+    height: 2px;
+  }
+}
+
+@media screen and (max-width: 300px) {
+  .navbarWrapper {
+    padding: 10px 20px;
+  }
+
+  .logo {
+    width: 30px;
+  }
+
+  .logoText {
+    font-size: 18px;
+  }
+
+  .isMobileMenuWrapper {
+    width: 100%;
+  }
+
+  /* Mobile menu expand icon under 300px */
+
+  .mobileMenu {
+    display: flex;
+    flex-direction: column;
+    width: 20px;
+  }
+
+  .menuItem {
+    margin: 2px;
+    height: 2px;
+  }
+}
