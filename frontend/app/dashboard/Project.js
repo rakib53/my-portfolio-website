@@ -9,7 +9,7 @@ export default function Project(props) {
 
   const handleDeleteProject = async (id) => {
     const deleteProject = await fetch(
-      `http://localhost:9000/api/delete-project/projects?id=${id}`,
+      `https://my-portfolio-backend-bice.vercel.app/api/delete-project/projects?id=${id}`,
       {
         method: "DELETE",
         headers: {

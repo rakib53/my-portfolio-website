@@ -35,7 +35,7 @@ export default function page() {
         Credential: true,
       };
       const createProject = await fetch(
-        "http://localhost:9000/api/create-project",
+        "https://my-portfolio-backend-bice.vercel.app/api/create-project",
         requestOptions
       );
       const data = await createProject.json();

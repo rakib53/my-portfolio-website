@@ -13,7 +13,7 @@ export async function middleware(request) {
     } else {
       try {
         const response = await fetch(
-          "http://localhost:9000/api/validate-user",
+          "https://my-portfolio-backend-bice.vercel.app/api/validate-user",
           {
             method: "POST",
             headers: {

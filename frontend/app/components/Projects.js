@@ -11,13 +11,16 @@ import NEXTJS from "/public/skills/nextjs.png";
 import NODE from "/public/skills/node-js.webp";
 
 async function getData() {
-  const res = await fetch("http://localhost:9000/api/get-projects", {
-    next: { revalidate: 10 },
-  });
+  const res = await fetch(
+    "https://my-portfolio-backend-bice.vercel.app/api/get-projects",
+    {
+      next: { revalidate: 10 },
+    }
+  );
 
   if (!res.ok) {
     // This will activate the closest `error.js` Error Boundary
-    throw new Error("Failed to fetch data");
+    console.log("Failed to fetch data");
   }
   return await res.json();
 }
