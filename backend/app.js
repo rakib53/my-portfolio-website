@@ -15,6 +15,10 @@ app.use(
       "https://www.rakib-portfolio-website.vercel.app/",
       "http://rakib-portfolio-website.vercel.app/",
       "http://www.rakib-portfolio-website.vercel.app/",
+      "https://rakib-portfolio-website.vercel.app",
+      "https://www.rakib-portfolio-website.vercel.app",
+      "http://rakib-portfolio-website.vercel.app",
+      "http://www.rakib-portfolio-website.vercel.app",
     ], // Adjust if necessary
     credentials: true, // Enable cookies for cross-origin requests (if applicable)
   })
