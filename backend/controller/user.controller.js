@@ -20,6 +20,7 @@ const Login = async (req, res) => {
           httpOnly: true,
           secure: true,
           sameSite: "none",
+          domain: ".vercel.app",
         })
         .status(200)
         .json({
