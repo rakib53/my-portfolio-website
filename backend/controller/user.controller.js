@@ -19,6 +19,7 @@ const Login = async (req, res) => {
           expires: new Date(Date.now() + 24 * 60 * 60 * 1000),
           httpOnly: true,
           secure: true,
+          sameSite: "Lax",
           domains: [
             "http://localhost:3000/",
             "http://localhost:3000",
@@ -31,7 +32,6 @@ const Login = async (req, res) => {
             "http://rakib-portfolio-website.vercel.app",
             "http://www.rakib-portfolio-website.vercel.app",
           ],
-          sameSite: "none",
         })
         .status(200)
         .json({
