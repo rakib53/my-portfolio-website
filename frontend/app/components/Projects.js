@@ -15,6 +15,7 @@ async function getData() {
     "https://my-portfolio-backend-bice.vercel.app/api/get-projects",
     {
       next: { revalidate: 10 },
+      credentials: "include",
     }
   );
 

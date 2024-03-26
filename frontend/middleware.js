@@ -20,6 +20,7 @@ export async function middleware(request) {
               "content-type": "application/json",
               token: token.value,
             },
+            credentials: "include",
           }
         );
         const userData = await response.json();
