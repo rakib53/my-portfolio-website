@@ -18,12 +18,14 @@ export default function Login() {
       "https://my-portfolio-backend-bice.vercel.app/api/login",
       {
         method: "POST",
-        headers: { "Content-Type": "application/json" },
+        credentials: "include",
+        headers: {
+          "Content-Type": "application/json",
+        },
         body: JSON.stringify({
           email: formData?.email,
           password: formData?.password,
         }),
-        credentials: "include",
       }
     );
     const userData = await response.json();
@@ -35,11 +37,13 @@ export default function Login() {
   };
   return (
     <div className="container">
-      <h2>Admin login</h2>
+      <h2 style={{ color: "white" }}>Admin login</h2>
       <div>
         <form onSubmit={handleLogin}>
           <div className={styles.field}>
-            <label htmlFor="email">Email*</label>
+            <label htmlFor="email" style={{ color: "#ddd" }}>
+              Email*
+            </label>
             <input
               type="email"
               placeholder="Enter your email"
@@ -50,7 +54,9 @@ export default function Login() {
             />
           </div>
           <div className={styles.field}>
-            <label htmlFor="email">Password*</label>
+            <label htmlFor="email" style={{ color: "#ddd" }}>
+              Password*
+            </label>
             <input
               type="password"
               placeholder="Enter your Password"

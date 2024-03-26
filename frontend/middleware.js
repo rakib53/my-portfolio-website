@@ -17,7 +17,7 @@ export async function middleware(request) {
           {
             method: "POST",
             headers: {
-              "content-type": "application/json",
+              "Content-type": "application/json",
               token: token.value,
             },
             credentials: "include",
