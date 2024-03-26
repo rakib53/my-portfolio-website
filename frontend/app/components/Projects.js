@@ -33,8 +33,7 @@ export default async function Projects() {
       <div className="container">
         <h2 className="sectionTitle">Projects</h2>
         <p className="sectionDesc">
-          Discover my journey of creativity through these{" "}
-          <Link href="/add-project">Projects.</Link>
+          Discover my journey of creativity through these Projects.
         </p>
         <div></div>
         <div className={styles.projectWrapper}>
