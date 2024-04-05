@@ -11,7 +11,7 @@ import NEXTJS from "/public/skills/nextjs.png";
 import NODE from "/public/skills/node-js.webp";
 
 async function getData() {
-  const res = await fetch("http://localhost:9000/api/get-projects", {
+  const res = await fetch(`${process.env.PRODUCTION_API}/get-projects`, {
     next: { revalidate: 10 },
     credentials: "include",
   });

@@ -11,15 +11,18 @@ export default function HomeLogin() {
   const handleLogin = async (event) => {
     event.preventDefault();
 
-    const response = await fetch("http://localhost:9000/api/login", {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({
-        email: loginInfo?.email,
-        password: loginInfo?.password,
-      }),
-      credentials: "include",
-    });
+    const response = await fetch(
+      `${process.env.NEXT_PUBLIC_LOCALHOST_API}/login`,
+      {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          email: loginInfo?.email,
+          password: loginInfo?.password,
+        }),
+        credentials: "include",
+      }
+    );
     const userData = await response.json();
     console.log(userData);
   };
