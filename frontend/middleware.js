@@ -7,20 +7,22 @@ export async function middleware(request) {
 
   if (protectedRoutes.includes(url.pathname)) {
     const token = request.cookies.get("access_token");
+
     if (!token) {
-      // Not authenticated, redirect to authentication page
+      // Not authenticated, redirect to login
       return NextResponse.redirect(new URL("/authentication", request.url));
     } else {
+      // Validate token on the server-side
       try {
         const response = await fetch(
-          "https://my-portfolio-backend-bice.vercel.app/api/validate-user",
+          `${process.env.LOCALHOST_API}/validate-user`,
           {
             method: "POST",
             headers: {
               "Content-type": "application/json",
               token: token.value,
             },
-            credentials: "include",
+            credentials: "include", // Include cookies for cross-site requests (if applicable)
           }
         );
         const userData = await response.json();

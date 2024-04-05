@@ -5,7 +5,7 @@ import Project from "./Project";
 
 async function getData() {
   const res = await fetch(
-    "https://my-portfolio-backend-bice.vercel.app/api/get-projects",
+    `${process.env.NEXT_PUBLIC_LOCALHOST_API}/get-projects`,
     {
       next: { revalidate: 10 },
       credentials: "include",

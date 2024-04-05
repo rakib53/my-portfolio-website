@@ -15,7 +15,7 @@ export default function Login() {
     event.preventDefault();
 
     const response = await fetch(
-      "https://my-portfolio-backend-bice.vercel.app/api/login",
+      `${process.env.NEXT_PUBLIC_LOCALHOST_API}/login`,
       {
         method: "POST",
         credentials: "include",
