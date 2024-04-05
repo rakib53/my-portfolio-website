@@ -4,13 +4,10 @@ import styles from "./dashboard.module.css";
 import Project from "./Project";
 
 async function getData() {
-  const res = await fetch(
-    "https://my-portfolio-backend-bice.vercel.app/api/get-projects",
-    {
-      next: { revalidate: 10 },
-      credentials: "include",
-    }
-  );
+  const res = await fetch("http://localhost:9000/api/get-projects", {
+    next: { revalidate: 10 },
+    credentials: "include",
+  });
 
   if (!res.ok) {
     // This will activate the closest `error.js` Error Boundary

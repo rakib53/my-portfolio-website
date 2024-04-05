@@ -14,20 +14,17 @@ export default function Login() {
   const handleLogin = async (event) => {
     event.preventDefault();
 
-    const response = await fetch(
-      "https://my-portfolio-backend-bice.vercel.app/api/login",
-      {
-        method: "POST",
-        credentials: "include",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({
-          email: formData?.email,
-          password: formData?.password,
-        }),
-      }
-    );
+    const response = await fetch("http://localhost:9000/api/login", {
+      method: "POST",
+      credentials: "include",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        email: formData?.email,
+        password: formData?.password,
+      }),
+    });
     const userData = await response.json();
     if (userData?.email) {
       router.push("/dashboard");
