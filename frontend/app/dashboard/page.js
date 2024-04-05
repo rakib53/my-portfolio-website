@@ -30,7 +30,9 @@ export default async function page() {
         <h2 className={styles.allProjectText}>All projects</h2>
         <div>
           <span className={styles.addProjectBtn}>
-            <Link href={"/dashboard/add-project"}>Add project</Link>
+            <Link href={"/dashboard/add-project"} className="addProjectBtn">
+              Add project
+            </Link>
           </span>
         </div>
       </div>
