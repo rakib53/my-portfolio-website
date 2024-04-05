@@ -5,24 +5,24 @@ import React from "react";
 import styles from "./dashboard.module.css";
 import Project from "./Project";
 
-async function getData() {
-  const res = await fetch(
-    `${process.env.NEXT_PUBLIC_PRODUCTION_API}/get-projects`,
-    {
-      next: { revalidate: 10 },
-      credentials: "include",
-    }
-  );
+// async function getData() {
+//   const res = await fetch(
+//     `${process.env.NEXT_PUBLIC_PRODUCTION_API}/get-projects`,
+//     {
+//       next: { revalidate: 10 },
+//       credentials: "include",
+//     }
+//   );
 
-  if (!res.ok) {
-    // This will activate the closest `error.js` Error Boundary
-    return [];
-  }
-  return await res.json();
-}
+//   if (!res.ok) {
+//     // This will activate the closest `error.js` Error Boundary
+//     return [];
+//   }
+//   return await res.json();
+// }
 
 export default async function page() {
-  const projects = await getData();
+  const projects = [];
 
   return (
     <div className="container">
