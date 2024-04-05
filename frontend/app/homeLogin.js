@@ -12,7 +12,7 @@ export default function HomeLogin() {
     event.preventDefault();
 
     const response = await fetch(
-      `${process.env.NEXT_PUBLIC_LOCALHOST_API}/login`,
+      `${process.env.NEXT_PUBLIC_PRODUCTION_API}/login`,
       {
         method: "POST",
         headers: { "Content-Type": "application/json" },
