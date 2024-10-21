@@ -1,8 +1,8 @@
 "use client";
 
-import React, { useState } from "react";
-import styles from "./Login.module.css";
 import { useRouter } from "next/navigation";
+import { useState } from "react";
+import styles from "./Login.module.css";
 
 export default function Login() {
   const [formData, setFormData] = useState({
@@ -13,26 +13,33 @@ export default function Login() {
 
   const handleLogin = async (event) => {
     event.preventDefault();
-
-    const response = await fetch(
-      `${process.env.NEXT_PUBLIC_PRODUCTION_API}/login`,
-      {
-        method: "POST",
-        credentials: "include",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({
-          email: formData?.email,
-          password: formData?.password,
-        }),
+    try {
+      const response = await fetch(
+        `${
+          process.env.NEXT_PUBLIC_NODE_ENV === "production"
+            ? process.env.NEXT_PUBLIC_PRODUCTION_API
+            : process.env.NEXT_PUBLIC_LOCALHOST_API
+        }/signin`,
+        {
+          method: "POST",
+          credentials: "include",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({
+            email: formData?.email,
+            password: formData?.password,
+          }),
+        }
+      );
+      const userData = await response.json();
+      if (userData?.email) {
+        router.push("/dashboard");
+      } else {
+        router.push("/signin");
       }
-    );
-    const userData = await response.json();
-    if (userData?.email) {
-      router.push("/dashboard");
-    } else {
-      router.push("/");
+    } catch (error) {
+      console.log(error);
     }
   };
   return (

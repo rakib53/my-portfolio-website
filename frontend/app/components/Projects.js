@@ -3,24 +3,23 @@ import { BsGithub } from "react-icons/bs";
 import styles from "../styles/Projects.module.css";
 // technology Images
 import Link from "next/link";
-import MONGODB from "../../public/skills/mongodb.png";
-import REACT from "../../public/skills/react.png";
-import REDUX from "../../public/skills/redux.png";
-import EXPRESSJS from "/public/skills/express.png";
-import NEXTJS from "/public/skills/nextjs.png";
-import NODE from "/public/skills/node-js.webp";
+import ProjectHeader from "./ProjectHeader";
 
 async function getData() {
-  const res = await fetch(`${process.env.PRODUCTION_API}/get-projects`, {
-    next: { revalidate: 10 },
-    credentials: "include",
-  });
+  try {
+    const res = await fetch(`${process.env.PRODUCTION_API}/get-projects`, {
+      next: { revalidate: 10 },
+      credentials: "include",
+    });
 
-  if (!res.ok) {
-    // This will activate the closest `error.js` Error Boundary
-    return [];
+    if (!res.ok) {
+      // This will activate the closest `error.js` Error Boundary
+      return [];
+    }
+    return await res.json();
+  } catch (error) {
+    console.log(error);
   }
-  return await res.json();
 }
 
 export default async function Projects() {
@@ -33,7 +32,7 @@ export default async function Projects() {
         <p className="sectionDesc">
           Discover my journey of creativity through these Projects.
         </p>
-        <div></div>
+        <ProjectHeader />
         <div className={styles.projectWrapper}>
           {projects?.map((project, index) => {
             return (

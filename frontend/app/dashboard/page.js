@@ -1,28 +1,39 @@
 "use client";
 
+import axios from "axios";
 import Link from "next/link";
-import React from "react";
+import { useEffect, useState } from "react";
 import styles from "./dashboard.module.css";
 import Project from "./Project";
 
-// async function getData() {
-//   const res = await fetch(
-//     `${process.env.NEXT_PUBLIC_PRODUCTION_API}/get-projects`,
-//     {
-//       next: { revalidate: 10 },
-//       credentials: "include",
-//     }
-//   );
+// Fetching all projects
+const getAllProjects = async () => {
+  try {
+    const getProjects = await axios.get(
+      `${
+        process.env.NEXT_PUBLIC_NODE_ENV === "production"
+          ? process.env.NEXT_PUBLIC_PRODUCTION_API
+          : process.env.NEXT_PUBLIC_LOCALHOST_API
+      }/get-projects`
+    );
+    return getProjects.data; // Correctly accessing the data from the axios response
+  } catch (error) {
+    console.error("Error fetching projects:", error);
+    return []; // Return an empty array in case of error to avoid breaking the UI
+  }
+};
 
-//   if (!res.ok) {
-//     // This will activate the closest `error.js` Error Boundary
-//     return [];
-//   }
-//   return await res.json();
-// }
+export default function Page() {
+  const [projects, setProjects] = useState([]);
 
-export default async function page() {
-  const projects = [];
+  useEffect(() => {
+    const fetchProjects = async () => {
+      const data = await getAllProjects();
+      setProjects(data); // Set the fetched projects to state
+    };
+
+    fetchProjects();
+  }, []);
 
   return (
     <div className="container">

@@ -1,8 +1,8 @@
 "use client";
 
-import React, { useState } from "react";
-import styles from "../../styles/AddProject.module.css";
+import { useState } from "react";
 import ImageUpload from "../../components/UploadImage";
+import styles from "../../styles/AddProject.module.css";
 // technologies
 const technologies = ["reactjs", "nextjs", "nodejs", "expressjs", "mongodb"];
 
@@ -14,34 +14,31 @@ export default function page() {
     description: "",
     imageLink: "",
     thumbnail: "",
-    password: "",
     technologies: ["reactjs", "nodejs", "expressjs", "mongodb"],
   });
 
   const handleCreateProject = async (event) => {
     event.preventDefault();
-    if (project?.password === "Rakib$$12") {
-      const requestOptions = {
-        method: "POST",
-        headers: { "Content-Type": "application/json", authentication: "sdsd" },
-        body: JSON.stringify({
-          title: project?.title,
-          description: project?.description,
-          liveSiteLink: project?.liveSiteLink,
-          githubLink: project?.githubLink,
-          thumbnail: project?.imageLink || project?.thumbnail,
-          technologies: ["reactjs", "nodejs", "expressjs", "mongodb"],
-        }),
-        Credential: true,
-      };
-      const createProject = await fetch(
-        `${process.env.NEXT_PUBLIC_PRODUCTION_API}/create-project`,
-        requestOptions
-      );
-      const data = await createProject.json();
-    } else {
-      alert("You're not the owner of this portfolio!");
-    }
+    const requestOptions = {
+      method: "POST",
+      headers: { "Content-Type": "application/json", authentication: "sdsd" },
+      body: JSON.stringify({
+        title: project?.title,
+        description: project?.description,
+        liveSiteLink: project?.liveSiteLink,
+        githubLink: project?.githubLink,
+        thumbnail: project?.imageLink || project?.thumbnail,
+        technologies: ["reactjs", "nodejs", "expressjs", "mongodb"],
+      }),
+      Credential: true,
+    };
+    const createProject = await fetch(
+      `${process.env.NEXT_PUBLIC_PRODUCTION_API}/create-project`,
+      requestOptions
+    );
+    const data = await createProject.json();
+
+    console.log(data);
   };
 
   return (
@@ -93,17 +90,7 @@ export default function page() {
               }}
             />
           </div>
-          <div>
-            <input
-              type="text"
-              placeholder="Enter password"
-              className={styles.addProjectField}
-              value={project?.password}
-              onChange={(e) => {
-                setProjects({ ...project, password: e.target.value });
-              }}
-            />
-          </div>
+
           <div>
             <textarea
               placeholder="description"
