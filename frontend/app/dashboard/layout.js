@@ -1,6 +1,7 @@
 "use client";
 
 import { useRouter } from "next/navigation";
+import Navbar from "../components/Navbar";
 import useAuth from "../hooks/useAuth";
 
 export default function layout({ children }) {
@@ -23,6 +24,13 @@ export default function layout({ children }) {
   }
 
   if (user) {
-    return children;
+    return (
+      <div style={{ display: "flex", flexDirection: "column", gap: "50px" }}>
+        <div style={{ marginTop: "30px" }}>
+          <Navbar />
+        </div>
+        <div>{children}</div>
+      </div>
+    );
   }
 }

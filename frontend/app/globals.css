@@ -1,11 +1,9 @@
 @import url("https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,400;1,500;1,700;1,800;1,900&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap");
 
-@import url("https://fonts.googleapis.com/css2?family=Poppins:wght@100;200;300;400;500;600;700;800;900&display=swap");
-@import url("https://fonts.googleapis.com/css2?family=Sigmar&display=swap");
-
-@import url("https://fonts.googleapis.com/css2?family=Anton&display=swap");
-
-@import url("https://fonts.googleapis.com/css2?family=Lilita+One&display=swap");
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
 
 :root {
   --max-width: 1100px;
@@ -27,12 +25,35 @@
   margin: 0;
 }
 
-html,
 body {
   overflow-x: hidden;
   background-color: var(--bg-color);
-  font-family: var(--font-monserrat);
+  font-family: "Montserrat", sans-serif;
   scroll-behavior: smooth;
+}
+
+.section-margin {
+  @apply py-[50px] px-0;
+}
+
+.section-title {
+  @apply text-center text-text-color text-[36px] mb-2 font-inter font-bold;
+}
+
+.section-description {
+  @apply text-text-color2 font-medium text-base text-center mb-9 font-inter;
+}
+
+/* Skills section css  */
+.skill-card {
+  @apply w-[128px] flex flex-col items-center bg-primaryCardBG p-5 rounded-md;
+}
+
+.skill-title {
+  @apply text-text-color font-inter font-medium;
+}
+.skill-image {
+  @apply w-[50px] h-auto mb-2.5;
 }
 
 .container {
@@ -41,25 +62,6 @@ body {
   margin: 0 auto;
   padding: 0 20px;
   overflow-x: hidden;
-}
-
-.sectionMargin {
-  padding: 50px 0;
-}
-
-.sectionTitle {
-  text-align: center;
-  color: var(--text-color);
-  font-size: 2.25rem;
-  margin-bottom: 1rem;
-}
-
-.sectionDesc {
-  color: var(--text-color2);
-  font-weight: 500;
-  font-size: 16px;
-  text-align: center;
-  margin-bottom: 2rem;
 }
 
 @media screen and (max-width: 1366px) {
@@ -81,11 +83,6 @@ body {
     max-width: 1144px;
     padding: 0 10px;
   }
-}
-
-a {
-  color: inherit;
-  text-decoration: none;
 }
 
 .btn {
@@ -159,6 +156,8 @@ a {
   height: 100vh;
 }
 
+/* Loading animation */
+
 .lds-ripple,
 .lds-ripple div {
   box-sizing: border-box;
@@ -179,6 +178,7 @@ a {
 .lds-ripple div:nth-child(2) {
   animation-delay: -0.5s;
 }
+
 @keyframes lds-ripple {
   0% {
     top: 36px;

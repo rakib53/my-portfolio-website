@@ -1,13 +1,15 @@
 "use client";
 
+import Link from "next/link";
 import { useEffect, useRef, useState } from "react";
-import styles from "../styles/Navbar.module.css";
+import useAuth from "../hooks/useAuth";
 import NavLogo from "./NavLogo";
 
 const Navbar = () => {
   const [isExpand, setIsExpand] = useState(false);
   const expandMenuRef = useRef(null);
   const humburgerMenuRef = useRef(null);
+  const { user } = useAuth();
 
   const handleExpandMenu = () => {
     setIsExpand(!isExpand);
@@ -30,74 +32,101 @@ const Navbar = () => {
   }, [expandMenuRef, isExpand]);
 
   return (
-    <div className={styles.parentNavbar}>
-      <div className={styles.navbarWrapper}>
+    <div className="px-4">
+      <div className="max-w-[1440px] w-full mx-auto h-[60px] rounded-full px-[40px] py-[10px] bg-[var(--navbar-bg)] flex items-center justify-between font-inter overflow-hidden">
         <NavLogo />
         <div
-          className={`${
-            isExpand ? styles.isMobileMenuWrapper : styles.mobileMenuWrapper
+          className={`fixed ${
+            isExpand
+              ? "w-[70%] h-full top-0 left-0 bg-[#2e2e2e] flex flex-col items-center justify-between p-5 z-[999999] shadow-[30px_0_180px_#000000] transition-all duration-300 ease-in-out"
+              : "min-h-screen top-0 left-[-1000px] bg-[#555353] flex flex-col items-start justify-between p-5 transition-all duration-500"
           }`}
           ref={expandMenuRef}
         >
-          <div className={styles.mobileLogo}>
+          <div className="block md:hidden">
             <NavLogo />
           </div>
-          <ul className={styles.navbarList}>
-            <li className={styles.navbarItem}>
-              <a href="#skills" className={styles.navbarLink}>
+          <ul className="flex flex-col md:flex-row items-stretch md:items-center space-y-4 md:space-y-0 list-none">
+            {user?.email && (
+              <li className="p-[10px_20px] bg-[#525252] text-center rounded-[5px] transition-all duration-500 hover:bg-[#8a8686] cursor-pointer">
+                <Link href="/dashboard" className="text-white text-[16px]">
+                  Dashboard
+                </Link>
+              </li>
+            )}
+            <li className="p-[10px_20px] bg-[#525252] text-center rounded-[5px] transition-all duration-500 hover:bg-[#8a8686] cursor-pointer">
+              <a href="#skills" className="text-white text-[16px]">
                 Skills
               </a>
             </li>
-            <li className={styles.navbarItem}>
-              <a href="#projects" className={styles.navbarLink}>
+            <li className="p-[10px_20px] bg-[#525252] text-center rounded-[5px] transition-all duration-500 hover:bg-[#8a8686] cursor-pointer">
+              <a href="#projects" className="text-white text-[16px]">
                 Projects
               </a>
             </li>
-            <li className={styles.navbarItem}>
-              <a href="#testmonials" className={styles.navbarLink}>
+            <li className="p-[10px_20px] bg-[#525252] text-center rounded-[5px] transition-all duration-500 hover:bg-[#8a8686] cursor-pointer">
+              <a href="#testmonials" className="text-white text-[16px]">
                 Testmonial
               </a>
             </li>
-            <li className={styles.navbarItem}>
-              <a href="#skills" className={styles.navbarLink}>
+            <li className="p-[10px_20px] bg-[#525252] text-center rounded-[5px] transition-all duration-500 hover:bg-[#8a8686] cursor-pointer">
+              <a href="#about" className="text-white text-[16px]">
                 About me
               </a>
             </li>
-            <li className={styles.navbarItem}>
+            <li className="p-[10px_20px] bg-[#525252] text-center rounded-[5px] transition-all duration-500 hover:bg-[#8a8686] cursor-pointer">
               <a
                 href="https://drive.google.com/file/d/1eC6_lOj0bZegZKN5wlPWeXPxA_t3ki8n/view?usp=drive_link"
-                target=" "
-                className={styles.navbarLink}
+                target="_blank"
+                className="text-white text-[16px]"
               >
                 Resume
               </a>
             </li>
           </ul>
-          <div className={styles.mobileContactMeBTn}>
-            <a href="#contact" className={`btn ${styles.navbarButton}`}>
+          <div className="block md:hidden mt-5">
+            <a
+              href="#contact"
+              className="rounded-full py-3 px-[30px] text-white text-[16px] font-medium bg-[var(--navbarButton-bg)] border border-[#868181] transition-all duration-300 ease-in-out hover:border-[var(--primary-color)]"
+            >
               Contact Me
             </a>
           </div>
         </div>
 
-        <div className={styles.contactMeBTn}>
-          <a href="#contact" className={`btn ${styles.navbarButton}`}>
+        <div className="hidden md:block">
+          <a
+            href="#contact"
+            className="rounded-full py-3 px-[30px] text-white text-[16px] font-medium bg-[var(--navbarButton-bg)] border border-[#868181] transition-all duration-300 ease-in-out hover:border-[var(--primary-color)]"
+          >
             Contact Me
           </a>
         </div>
         <div
-          className={styles.mobileMenu}
+          className="flex flex-col w-[30px] cursor-pointer md:hidden"
           onClick={handleExpandMenu}
           ref={humburgerMenuRef}
         >
           <span
-            className={`${isExpand ? styles.menuXTop : styles.menuItem}`}
+            className={`${
+              isExpand
+                ? "translate-y-[5px] rotate-[45deg]"
+                : "block w-full h-[3px] bg-white my-1.5 rounded transition-all duration-500"
+            }`}
           ></span>
           <span
-            className={`${isExpand ? styles.menuXVanish : styles.menuItem}`}
+            className={`${
+              isExpand
+                ? "hidden"
+                : "block w-full h-[3px] bg-white my-1.5 rounded transition-all duration-500"
+            }`}
           ></span>
           <span
-            className={`${isExpand ? styles.menuXBottom : styles.menuItem}`}
+            className={`${
+              isExpand
+                ? "translate-y-[-4px] rotate-[135deg]"
+                : "block w-full h-[3px] bg-white my-1.5 rounded transition-all duration-500"
+            }`}
           ></span>
         </div>
       </div>

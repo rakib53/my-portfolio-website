@@ -1,6 +1,7 @@
 "use client";
 
-import React, { useState } from "react";
+import { useState } from "react";
+import EmptyImage from "../../public/empty.png";
 import styles from "./dashboard.module.css";
 
 export default function Project(props) {
@@ -26,13 +27,14 @@ export default function Project(props) {
       alert("Error deleting project!");
     }
   };
+
   const handleEditProject = (id) => {
     console.log(id);
   };
 
   return (
     <div className={styles.dashboardProject}>
-      <img src={project?.thumbnail} alt="" className={styles.projectImage} />
+      <img src={EmptyImage} alt="" className={styles.projectImage} />
       <h1 className={styles.projectTitle}>{project?.title}</h1>
       <h1 className={styles.projectDesc}>{project?.description}</h1>
 

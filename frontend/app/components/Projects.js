@@ -26,10 +26,10 @@ export default async function Projects() {
   const projects = await getData();
 
   return (
-    <section className="sectionMargin" id="projects">
+    <section className="section-margin" id="projects">
       <div className="container">
-        <h2 className="sectionTitle">Projects</h2>
-        <p className="sectionDesc">
+        <h2 className="section-title">Projects</h2>
+        <p className="section-description">
           Discover my journey of creativity through these Projects.
         </p>
         <ProjectHeader />

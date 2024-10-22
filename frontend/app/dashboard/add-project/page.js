@@ -1,6 +1,7 @@
 "use client";
 
 import { useState } from "react";
+import axiosInstance from "../../axios/axiosInstance";
 import ImageUpload from "../../components/UploadImage";
 import styles from "../../styles/AddProject.module.css";
 // technologies
@@ -19,26 +20,19 @@ export default function page() {
 
   const handleCreateProject = async (event) => {
     event.preventDefault();
-    const requestOptions = {
-      method: "POST",
-      headers: { "Content-Type": "application/json", authentication: "sdsd" },
-      body: JSON.stringify({
+    try {
+      const response = await axiosInstance.post("/create-project", {
         title: project?.title,
         description: project?.description,
         liveSiteLink: project?.liveSiteLink,
         githubLink: project?.githubLink,
         thumbnail: project?.imageLink || project?.thumbnail,
         technologies: ["reactjs", "nodejs", "expressjs", "mongodb"],
-      }),
-      Credential: true,
-    };
-    const createProject = await fetch(
-      `${process.env.NEXT_PUBLIC_PRODUCTION_API}/create-project`,
-      requestOptions
-    );
-    const data = await createProject.json();
-
-    console.log(data);
+      });
+      console.log(response.data);
+    } catch (error) {
+      console.log(error);
+    }
   };
 
   return (

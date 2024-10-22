@@ -5,103 +5,109 @@ import ResponsivbeDesignImage from "../../public/services/responsive_design_colo
 import MaintanceAndSupportImage from "../../public/services/technical-support_color.png";
 import customWebsiteImage from "../../public/services/web_design_color.png";
 import WebsitePerformanceImage from "../../public/services/website_performance_color.png";
-import styles from "../styles/services.module.css";
+import Container from "./Container";
 
 const Services = () => {
   return (
-    <section className="sectionMargin" id="service">
-      <div className="container">
-        <h2 className="sectionTitle">My Services</h2>
-        <p className="sectionDesc">
+    <section className="section-margin" id="service">
+      <Container>
+        <h2 className="section-title">My Services</h2>
+        <p className="section-description">
           Explore the range of services I offer to help you achieve your goals
           and vision.
         </p>
-        <div className={styles.servicesWrapper}>
-          <div className={styles.service}>
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8 lg:gap-12">
+          <div className="w-full py-[30px] px-[40px] rounded-lg bg-primaryCardBG">
             <Image
               src={customWebsiteImage}
-              className={styles.serviceImage}
+              className="w-[70px] h-auto mb-2.5"
               alt="custom website"
             />
-            <h3 className={styles.serviceTitle}>
+            <h3 className="text-[22px] text-text-color mb-2.5 font-semibold font-monserrat">
               Custom Application Development
             </h3>
-            <p className={styles.serviceDesc}>
+            <p className="text-base font-medium text-text-color2 font-monserrat">
               Delivering tailor-made web applications to address unique business
               needs, streamline processes, and drive growth.
             </p>
           </div>
 
-          <div className={styles.service}>
+          <div className="w-full py-[30px] px-[40px] rounded-lg bg-primaryCardBG">
             <Image
               src={apiInregationImage}
-              className={styles.serviceImage}
+              className="w-[70px] h-auto mb-2.5"
               alt="api intregation"
             />
-            <h3 className={styles.serviceTitle}>
+            <h3 className="text-[22px] text-text-color mb-2.5 font-semibold font-monserrat">
               API Development and Integration
             </h3>
-            <p className={styles.serviceDesc}>
+            <p className="text-base font-inter font-medium text-text-color2">
               Ensuring smooth communication and data exchange between software
               systems through API development and integration.
             </p>
           </div>
 
-          <div className={styles.service}>
+          <div className="w-full py-[30px] px-[40px] rounded-lg bg-primaryCardBG">
             <Image
               src={DatabaseManagmentImage}
-              className={styles.serviceImage}
+              className="w-[70px] h-auto mb-2.5"
               alt="database management"
             />
-            <h3 className={styles.serviceTitle}>Database Management</h3>
-            <p className={styles.serviceDesc}>
+            <h3 className="text-[22px] text-text-color mb-2.5 font-semibold font-monserrat">
+              Database Management
+            </h3>
+            <p className="text-base font-medium text-text-color2 font-monserrat">
               Designing and managing efficient, secure databases for seamless
               data storage, retrieval, and analysis.
             </p>
           </div>
 
-          <div className={styles.service}>
+          <div className="w-full py-[30px] px-[40px] rounded-lg bg-primaryCardBG">
             <Image
               src={ResponsivbeDesignImage}
-              className={styles.serviceImage}
+              className="w-[70px] h-auto mb-2.5"
               alt="responsive design"
             />
-            <h3 className={styles.serviceTitle}>Responsive Design</h3>
-            <p className={styles.serviceDesc}>
+            <h3 className="text-[22px] text-text-color mb-2.5 font-semibold font-monserrat">
+              Responsive Design
+            </h3>
+            <p className="text-base font-medium text-text-color2 font-monserrat">
               Creating mobile-friendly websites with responsive design
               techniques for consistent user experiences across devices.
             </p>
           </div>
 
-          <div className={styles.service}>
+          <div className="w-full py-[30px] px-[40px] rounded-lg bg-primaryCardBG">
             <Image
               src={WebsitePerformanceImage}
-              className={styles.serviceImage}
+              className="w-[70px] h-auto mb-2.5"
               alt="website performance"
             />
-            <h3 className={styles.serviceTitle}>
+            <h3 className="text-[22px] text-text-color mb-2.5 font-semibold font-monserrat">
               Website Performance Optimization
             </h3>
-            <p className={styles.serviceDesc}>
+            <p className="text-base font-medium text-text-color2 font-monserrat">
               Enhancing website speed, performance, and user experience through
               meticulous optimization techniques.
             </p>
           </div>
 
-          <div className={styles.service}>
+          <div className="w-full py-[30px] px-[40px] rounded-lg bg-primaryCardBG">
             <Image
               src={MaintanceAndSupportImage}
-              className={styles.serviceImage}
+              className="w-[70px] h-auto mb-2.5"
               alt="maintance and support"
             />
-            <h3 className={styles.serviceTitle}>Maintenance and Support</h3>
-            <p className={styles.serviceDesc}>
+            <h3 className="text-[22px] text-text-color mb-2.5 font-semibold font-monserrat">
+              Maintenance and Support
+            </h3>
+            <p className="text-base font-medium text-text-color2 font-monserrat">
               Providing ongoing support, bug fixes, and updates to ensure
               website functionality, performance, and user satisfaction.
             </p>
           </div>
         </div>
-      </div>
+      </Container>
     </section>
   );
 };

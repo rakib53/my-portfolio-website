@@ -19,7 +19,7 @@ export async function GET(request) {
         method: "GET",
         headers: {
           "Content-type": "application/json",
-          token: token.value, // Send token to backend
+          cookie: `access_token=${token.value}`,
         },
         credentials: "include",
       }

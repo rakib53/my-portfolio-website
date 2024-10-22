@@ -1,99 +1,170 @@
+"use client";
+
 import Link from "next/link";
+import { useState } from "react";
 import { BiPhoneCall } from "react-icons/bi";
 import { BsArrowRightShort } from "react-icons/bs";
 import { MdOutlineMarkEmailRead, MdOutlineWhatsapp } from "react-icons/md";
-import styles from "../styles/ContactForm.module.css";
 
 export default function ContactForm() {
+  const [queryData, setQueryData] = useState({
+    fullName: "",
+    email: "",
+    query: "",
+  });
+
+  const handleQuerySubmit = (e) => {
+    e.preventDefault();
+    console.log("Submitting data:", queryData);
+  };
+
   return (
-    <section className="sectionMargin" id="contact">
-      <div className={styles.contactSection}>
-        <h2 className="sectionTitle">Get in touch</h2>
-        <p className="sectionDesc">Let's build something amazing together!</p>
-        <div className={styles.formContactWrapper}>
-          <div className={styles.formInfoWrapper}>
-            <h3 className={styles.title}>Talk to me</h3>
-            <div className={styles.infoCardWrapper}>
-              <div className={styles.infoCard}>
-                <MdOutlineMarkEmailRead className={styles.infoIcon} />
-                <h4 className={styles.infoTitle}>Email</h4>
-                <p className={styles.contactLine}>rakibdev53@gmail.com</p>
-                <span className={styles.getInText}>
-                  Write me <BsArrowRightShort className={styles.arrow} />
+    <section className="section-margin" id="contact">
+      <div className="max-w-[800px] w-full mx-auto">
+        <h2 className="section-title">Get in touch</h2>
+        <p className="section-description">
+          Let's build something amazing together!
+        </p>
+        <div className="flex flex-col px-5 md:px-0 md:flex-row gap-[50px] justify-between">
+          <div>
+            <h3 className="text-text-color mb-5 text-center font-inter font-medium text-lg">
+              Talk to me
+            </h3>
+            <div className="flex flex-col gap-5">
+              <div className="flex gap-1.5 flex-col items-center py-[25px] px-[30px] rounded-[4px] bg-primaryCardBG">
+                <MdOutlineMarkEmailRead className="w-[30px] h-[30px] text-text-color" />
+                <h4 className="text-text-color font-inter font-medium">
+                  Email
+                </h4>
+                <p className="text-base font-medium text-text-color2 font-inter">
+                  rakibdev53@gmail.com
+                </p>
+                <span className="flex items-center text-sm font-medium text-primary-color cursor-pointer font-monserrat">
+                  Write me <BsArrowRightShort className="w-[22px] h-[22px]" />
                 </span>
               </div>
-              <div className={styles.infoCard}>
-                <MdOutlineWhatsapp className={styles.infoIcon} />
-                <h4 className={styles.infoTitle}>Whatsapp</h4>
-                <p className={styles.contactLine}>+8801980551313</p>
-                <span className={styles.getInText}>
+              <div className="flex gap-1.5 flex-col items-center py-[25px] px-[30px] rounded-[4px] bg-primaryCardBG">
+                <MdOutlineWhatsapp className="w-[30px] h-[30px] text-text-color" />
+                <h4 className="text-text-color font-inter font-medium">
+                  Whatsapp
+                </h4>
+                <p className="text-base font-medium text-text-color2 font-inter">
+                  +8801980551313
+                </p>
+                <span className="flex items-center text-sm font-medium text-primary-color font-monserrat">
                   <Link
                     href={"https://wa.me/+8801980551313"}
                     target=" "
-                    className={styles.getInText}
+                    className="flex items-center text-sm font-medium text-primary-color cursor-pointer font-monserrat"
                   >
                     Whatsapp me
-                    <BsArrowRightShort className={styles.arrow} />
+                    <BsArrowRightShort className="w-[22px] h-[22px]" />
                   </Link>
                 </span>
               </div>
-              <div className={styles.infoCard}>
-                <BiPhoneCall className={styles.infoIcon} />
-                <h4 className={styles.infoTitle}>Phone</h4>
-                <p className={styles.contactLine}>+8801980551313</p>
-                <span className={styles.getInText}>
-                  Call me <BsArrowRightShort className={styles.arrow} />
+              <div className="flex gap-1.5 flex-col items-center py-[25px] px-[30px] rounded-[4px] bg-primaryCardBG">
+                <BiPhoneCall className="w-[30px] h-[30px] text-text-color" />
+                <h4 className="text-text-color font-inter font-medium">
+                  Phone
+                </h4>
+                <p className="text-base font-medium text-text-color2 font-inter">
+                  +8801980551313
+                </p>
+                <span className="flex items-center text-sm font-medium text-primary-color cursor-pointer font-monserrat">
+                  Call me <BsArrowRightShort className="w-[22px] h-[22px]" />
                 </span>
               </div>
             </div>
           </div>
-          <div className={styles.formWrapper}>
-            <h3 className={styles.title}>Write me your project</h3>
-            <form action="" className={styles.form}>
-              <div className={styles.inputParentWrapper}>
-                <div className={styles.inputWrapper}>
-                  <label htmlFor="" className={styles.label}>
+          <div className="w-full">
+            <h3 className="text-text-color mb-5 text-center font-inter font-medium text-lg">
+              Write me your project
+            </h3>
+            <form
+              className="w-full flex flex-col gap-8"
+              onSubmit={handleQuerySubmit}
+            >
+              <div>
+                <div className="relative">
+                  <label
+                    htmlFor="fullName"
+                    className="text-sm absolute -top-2 left-4 text-text-color bg-bg-color"
+                  >
                     Full Name*
                   </label>
                   <input
                     type="text"
-                    className={styles.input}
+                    id="fullName"
+                    className="w-full block outline-none text-text-color rounded border border-text-color bg-transparent hover:bg-primaryCardBG font-inter p-4 duration-200"
                     placeholder="Enter your name"
+                    value={queryData.fullName}
+                    onChange={(e) => {
+                      setQueryData({
+                        ...queryData,
+                        fullName: e.target.value,
+                      });
+                    }}
                   />
                 </div>
               </div>
 
-              <div className={styles.inputParentWrapper}>
-                <div className={styles.inputWrapper}>
-                  <label htmlFor="" className={styles.label}>
+              <div>
+                <div className="relative">
+                  <label
+                    htmlFor="email"
+                    className="text-sm absolute -top-2 left-4 text-text-color bg-bg-color"
+                  >
                     Email*
                   </label>
                   <input
                     type="email"
-                    className={styles.input}
+                    id="email"
+                    className="w-full block outline-none text-text-color rounded border border-text-color !bg-transparent hover:bg-primaryCardBG font-inter p-4 duration-200 !fill-transparent"
                     placeholder="Enter your email"
+                    value={queryData.email}
+                    onChange={(e) => {
+                      setQueryData({
+                        ...queryData,
+                        email: e.target.value,
+                      });
+                    }}
                   />
                 </div>
               </div>
 
-              <div className={styles.inputParentWrapper}>
-                <div className={styles.inputWrapper}>
-                  <label htmlFor="" className={styles.label}>
-                    First Name
+              <div>
+                <div className="relative">
+                  <label
+                    htmlFor="query"
+                    className="text-sm absolute -top-2 left-4 text-text-color bg-bg-color"
+                  >
+                    Query
                   </label>
                   <textarea
                     name=""
-                    id=""
+                    id="query"
                     cols="30"
                     rows="10"
-                    className={styles.input}
+                    className="w-full block outline-none text-text-color rounded border border-text-color bg-transparent hover:bg-primaryCardBG font-inter p-4 duration-200"
                     style={{ resize: "none" }}
                     placeholder="Enter your query"
+                    value={queryData.query}
+                    onChange={(e) => {
+                      setQueryData({
+                        ...queryData,
+                        query: e.target.value,
+                      });
+                    }}
                   ></textarea>
                 </div>
               </div>
-              <div className={styles.submitBtnWrapper}>
-                <button className={styles.submit}>Submit</button>
+              <div>
+                <button
+                  type="submit"
+                  className="text-base py-2.5 px-10 outline-none text-text-color bg-transparent border border-text-color rounded-[4px] font-inter cursor-pointer hover:bg-primaryCardBG duration-200"
+                >
+                  Submit
+                </button>
               </div>
             </form>
           </div>
