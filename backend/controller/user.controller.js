@@ -24,15 +24,15 @@ const Login = async (req, res) => {
     const token = jwt.sign(
       { email: user?.email, id: user?._id },
       process.env.JWT_SECRET_KEY,
-      { expiresIn: "24h" }
+      { expiresIn: "7d" } // JWT is valid for 7 days
     );
 
     return res
       .cookie("access_token", token, {
-        expires: new Date(Date.now() + 24 * 60 * 60 * 1000),
+        expires: new Date(Date.now() + 7 * 24 * 60 * 60 * 1000), // Set cookie expiration for 7 days
         httpOnly: true,
-        secure: true,
-        sameSite: "none",
+        secure: process.env.NODE_ENV === "production", // Use secure cookies only in production
+        sameSite: process.env.NODE_ENV === "production" ? "none" : "lax",
       })
       .status(200)
       .json({
@@ -48,11 +48,12 @@ const Login = async (req, res) => {
 
 const validateUser = async (req, res, next) => {
   try {
-    const { token } = req.headers;
+    const { cookie } = req.headers;
     // Your JWT verification logic here
+    const token = getCookieValue(cookie, "access_token");
 
     if (!token) {
-      return res.status(401).json({ message: "No token provided" });
+      return res.status(401).json({ message: "No token provided." });
     }
 
     jwt.verify(token, process.env.JWT_SECRET_KEY, (error, decoded) => {
@@ -62,7 +63,7 @@ const validateUser = async (req, res, next) => {
       } else {
         res.status(404).json({
           user: null,
-          message: "unauthorize access detected!",
+          message: "Unauthorize access detected!",
         });
       }
     });
@@ -90,5 +91,13 @@ const getUserInfo = async (req, res, next) => {
     next(error);
   }
 };
+
+function getCookieValue(cookie, name) {
+  const match = cookie?.match(new RegExp("(^| )" + name + "=([^;]+)"));
+  if (match) {
+    return match[2];
+  }
+  return null;
+}
 
 export { getUserInfo, Login, validateUser };
