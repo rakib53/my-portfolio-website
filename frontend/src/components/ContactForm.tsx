@@ -1,11 +1,9 @@
-"use client";
-
-import Link from "next/link";
 import { useState } from "react";
 import toast, { Toaster } from "react-hot-toast";
 import { BiPhoneCall } from "react-icons/bi";
 import { BsArrowRightShort } from "react-icons/bs";
 import { MdOutlineMarkEmailRead, MdOutlineWhatsapp } from "react-icons/md";
+import { NavLink } from "react-router-dom";
 import axiosInstance from "../axios/axiosInstance";
 
 export default function ContactForm() {
@@ -16,7 +14,7 @@ export default function ContactForm() {
     query: "",
   });
 
-  const handleQuerySubmit = async (e) => {
+  const handleQuerySubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     if (!queryData?.fullName) {
       toast.error("Please enter your name", { position: "top-right" });
@@ -78,14 +76,14 @@ export default function ContactForm() {
                   +8801980551313
                 </p>
                 <span className="flex items-center text-sm font-medium text-primary-color font-monserrat">
-                  <Link
-                    href={"https://wa.me/+8801980551313"}
+                  <NavLink
+                    to={"https://wa.me/+8801980551313"}
                     target=" "
                     className="flex items-center text-sm font-medium text-primary-color cursor-pointer font-monserrat"
                   >
                     Whatsapp me
                     <BsArrowRightShort className="w-[22px] h-[22px]" />
-                  </Link>
+                  </NavLink>
                 </span>
               </div>
               <div className="flex gap-1.5 flex-col items-center py-[25px] px-[30px] rounded-[4px] bg-primaryCardBG">
@@ -169,8 +167,8 @@ export default function ContactForm() {
                   <textarea
                     name=""
                     id="query"
-                    cols="30"
-                    rows="10"
+                    cols={30}
+                    rows={10}
                     className="w-full block outline-none text-text-color rounded border border-text-color bg-transparent hover:bg-primaryCardBG font-inter p-4 duration-200"
                     style={{ resize: "none" }}
                     placeholder="Enter your query"
@@ -189,7 +187,7 @@ export default function ContactForm() {
                   type="submit"
                   className="text-base py-2.5 px-10 outline-none text-text-color bg-transparent border border-text-color rounded-[4px] font-inter cursor-pointer hover:bg-primaryCardBG duration-200"
                 >
-                  {isLoading ? "Submiting..." : "Submit"}
+                  {isLoading ? "Submitting..." : "Submit"}
                 </button>
               </div>
             </form>

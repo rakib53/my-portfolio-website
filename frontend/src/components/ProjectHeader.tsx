@@ -1,5 +1,3 @@
-"use client";
-
 import { useState } from "react";
 
 export default function ProjectHeader() {
@@ -8,8 +6,6 @@ export default function ProjectHeader() {
   const handleSetFilterStack = (value: string) => {
     setFilterStack(value);
   };
-
-  console.log(filterStack);
 
   return (
     <div className="flex items-center justify-start gap-8 mb-6">

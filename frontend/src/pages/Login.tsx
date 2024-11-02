@@ -1,12 +1,16 @@
 import { useState } from "react";
+import { NavLink, useNavigate } from "react-router-dom";
 import axiosInstance from "../axios/axiosInstance";
+import SquareCheckbox from "../components/Checkbox";
 import logo from "/logo.png";
 
 export default function Login() {
   const [formData, setFormData] = useState({
     email: "",
     password: "",
+    isRemember: false,
   });
+  const navigate = useNavigate();
 
   const handleLogin = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
@@ -14,35 +18,36 @@ export default function Login() {
       const loginResponse = await axiosInstance.post("/login", {
         email: formData?.email!,
         password: formData?.password!,
+        isRemember: formData?.isRemember,
       });
 
-      console.log(loginResponse);
-
-      // if (userData?.email) {
-      //   return redirect("/dashboard");
-      // } else {
-      //   return redirect("/login");
-      // }
+      if (loginResponse?.data?.email) {
+        navigate("/dashboard");
+      } else {
+        navigate("/login");
+      }
     } catch (error) {
-      console.log(error);
+      navigate("/login");
     }
   };
 
   return (
     <div className="flex justify-center h-screen items-center">
-      <div className="max-w-[440px] w-full rounded-2xl bg-[var(--navbar-bg)]">
-        <div className="flex justify-center py-4">
-          <img
-            src={logo}
-            alt="Rakib hossen portfolio's logo"
-            className="w-[60px]"
-          />
-        </div>
+      <div className="max-w-[440px] w-full rounded-2xl bg-[#aaaaaa7e]">
+        <NavLink to={"/"}>
+          <div className="flex justify-center py-4">
+            <img
+              src={logo}
+              alt="Rakib hossen portfolio's logo"
+              className="w-[60px]"
+            />
+          </div>
+        </NavLink>
         <div className="flex justify-center items-center flex-col gap-1">
-          <h2 className="text-2xl font-semibold font-inter">
+          <h2 className="text-2xl font-inter text-black font-bold">
             Login Admin Account
           </h2>
-          <p className="text-[#525866] text-base">
+          <p className="text-black text-base font-medium">
             Enter your details to login
           </p>
         </div>
@@ -52,11 +57,16 @@ export default function Login() {
           <form onSubmit={handleLogin}>
             <div className="flex flex-col gap-3">
               <div className="w-full flex flex-col gap-1">
-                <label htmlFor="email" className="text-black font-monserrat">
+                <label
+                  htmlFor="email"
+                  className="text-black font-medium font-monserrat"
+                >
                   Email*
                 </label>
                 <input
                   type="email"
+                  id="email"
+                  name="email"
                   placeholder="Enter your email"
                   value={formData.email}
                   className="w-full p-3 rounded-lg bg-primaryCardBG outline-none text-base text-gray-100"
@@ -66,11 +76,16 @@ export default function Login() {
                 />
               </div>
               <div className="w-full flex flex-col gap-1">
-                <label htmlFor="email" className="text-black font-monserrat">
+                <label
+                  htmlFor="password"
+                  className="text-black font-medium font-monserrat"
+                >
                   Password*
                 </label>
                 <input
                   type="password"
+                  id="password"
+                  name="password"
                   placeholder="Enter your Password"
                   value={formData.password}
                   className="w-full p-3 rounded-lg bg-primaryCardBG outline-none text-base text-gray-100"
@@ -79,14 +94,23 @@ export default function Login() {
                   }
                 />
               </div>
-              <div className="flex gap-1">
-                <input type="checkbox" name="remember_me" id="remember_me" />
-                <label htmlFor="remember_me" className="">
-                  Keep me logged in
-                </label>
+              <div className="w-full flex gap-1">
+                <SquareCheckbox
+                  isSelected={formData.isRemember}
+                  handleCheckbox={() =>
+                    setFormData({
+                      ...formData,
+                      isRemember: !formData.isRemember,
+                    })
+                  }
+                  label="Keep me logged in"
+                  checkboxNotSelectClass="border-primaryCardBG"
+                  checkboxSelectedClass="!bg-primaryCardBG border-primaryCardBG"
+                  labelClass="text-black !font-medium font-inter"
+                />
               </div>
               <div className="mt-4">
-                <button className="w-full p-3 rounded-lg bg-primaryCardBG outline-none text-white text-base">
+                <button className="w-full p-3 rounded-lg bg-primaryCardBG hover:bg-[#071122] outline-none text-white text-base">
                   Login
                 </button>
               </div>
