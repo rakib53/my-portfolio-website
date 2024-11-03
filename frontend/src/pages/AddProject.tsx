@@ -1,13 +1,15 @@
 import { useState } from "react";
 import toast, { Toaster } from "react-hot-toast";
+import axiosInstance from "../axios/axiosInstance";
 import Container from "../components/Container";
 import UploadThumbnail from "../components/UploadImage";
 
-interface Project {
+export interface Project {
   title: string;
   githubLink: string;
   liveSiteLink: string;
   description: string;
+  thumbnail: string;
   technologies: string[];
 }
 
@@ -17,6 +19,7 @@ export default function AddProject() {
     githubLink: "",
     liveSiteLink: "",
     description: "",
+    thumbnail: "",
     technologies: [],
   });
   const [isLoading, setIsLoading] = useState(false);
@@ -66,10 +69,8 @@ export default function AddProject() {
     });
     setIsLoading(true);
     try {
-      // await axiosInstance.post("/create-project", {
-      //   ...project,
-      //   thumbnail: selectedFile,
-      // });
+      const response = await axiosInstance.post("/create-project", project);
+      console.log(response.data);
       setIsLoading(false);
       toast.success("Project added successfully.", { position: "top-right" });
     } catch (error) {
@@ -230,6 +231,8 @@ export default function AddProject() {
                 <UploadThumbnail
                   selectedFile={selectedFile}
                   setSelectedFile={setSelectedFile}
+                  project={project}
+                  setProjects={setProjects}
                 />
               </div>
             </div>

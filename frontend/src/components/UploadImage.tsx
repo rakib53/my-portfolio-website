@@ -1,17 +1,23 @@
 import React, { useState } from "react";
 import toast from "react-hot-toast";
 import axiosInstance from "../axios/axiosInstance";
+import { Project } from "../pages/AddProject";
 
 interface UploadThumbnailProps {
+  project: Project;
   selectedFile: File | null;
+  setProjects: React.Dispatch<React.SetStateAction<Project>>;
   setSelectedFile: React.Dispatch<React.SetStateAction<File | null>>;
 }
 
 const UploadThumbnail = ({
+  project,
   selectedFile,
+  setProjects,
   setSelectedFile,
 }: UploadThumbnailProps) => {
   const [isLoading, setIsLoading] = useState(false);
+  const [isUploaded, setIsUploaded] = useState(false);
   const [preview, setPreview] = useState("");
 
   // Select the file to upload
@@ -53,7 +59,12 @@ const UploadThumbnail = ({
       });
 
       if (response.status === 200) {
+        setProjects({
+          ...project,
+          thumbnail: response.data?.fileId,
+        });
         toast.success("File uploaded successfully!", { position: "top-right" });
+        setIsUploaded(true);
         setIsLoading(false);
       } else {
         setIsLoading(false);
@@ -141,9 +152,11 @@ const UploadThumbnail = ({
         {selectedFile && (
           <button
             onClick={uploadFile}
-            className="mt-2 px-4 py-2 bg-blue-500 text-white rounded"
+            className={`mt-2 px-4 py-2 text-white rounded ${
+              isUploaded ? "bg-green-700" : "bg-blue-500"
+            }`}
           >
-            {isLoading ? "uploading..." : "Upload"}
+            {isLoading ? "uploading..." : isUploaded ? "Uploaded" : "Upload"}
           </button>
         )}
       </div>
