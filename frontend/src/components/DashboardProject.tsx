@@ -2,10 +2,22 @@ import toast, { Toaster } from "react-hot-toast";
 import { NavLink } from "react-router-dom";
 import axiosInstance from "../axios/axiosInstance";
 
+export interface ProjectInfo {
+  _id?: string;
+  title: string;
+  githubLink: string;
+  liveSiteLink: string;
+  description: string;
+  thumbnail: {
+    destination: string;
+  };
+  technologies: string[];
+}
+
 export default function DashboardProject({
   project,
 }: {
-  project: { _id: string; title: string; description: string };
+  project: ProjectInfo;
 }) {
   const handleDeleteProject = async (id: string) => {
     try {
@@ -32,8 +44,12 @@ export default function DashboardProject({
   return (
     <div className="bg-primaryCardBG p-2 rounded-xl">
       <Toaster />
-      <div>
-        <img src="" alt="" />
+      <div className="w-full mb-3">
+        <img
+          src={`http://localhost:5000${project?.thumbnail?.destination}`}
+          className="w-full h-[200px] object-cover rounded-xl"
+          alt=""
+        />
       </div>
       <h1 className="text-text-color text-lg font-inter font-medium">
         {project?.title}
@@ -50,7 +66,7 @@ export default function DashboardProject({
         </NavLink>
         <button
           className="bg-red-500 text-white py-1 px-5 rounded-lg"
-          onClick={() => handleDeleteProject(project?._id)}
+          onClick={() => handleDeleteProject(project?._id!)}
         >
           Delete
         </button>

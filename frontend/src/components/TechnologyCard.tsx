@@ -5,14 +5,14 @@ import NODE from "/skills/nodejs.png";
 import REDUX from "/skills/redux.png";
 
 // Define the technology keys as a TypeScript union type
-type Technology = "expressjs" | "nextjs" | "mongodb" | "nodejs" | "redux";
+type Technology = "express-js" | "next-js" | "mongodb" | "node-js" | "redux";
 
 // Define the image map with specific keys
 const TECHNOLOGY_IMAGES: Record<Technology, string> = {
-  expressjs: EXPRESS,
-  nextjs: NEXTJS,
+  "express-js": EXPRESS,
+  "next-js": NEXTJS,
   mongodb: MONGODB,
-  nodejs: NODE,
+  "node-js": NODE,
   redux: REDUX,
 };
 

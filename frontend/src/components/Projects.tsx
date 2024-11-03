@@ -52,10 +52,10 @@ export default function Projects() {
                   )}
 
                   <NavLink to={project?.liveSiteLink} target=" ">
-                    <div className="w-full h-[200px]">
+                    <div className="w-full">
                       <img
-                        src={""}
-                        className="w-full h-auto rounded-xl"
+                        src={`http://localhost:5000${project?.thumbnail?.destination}`}
+                        className="w-full h-[200px] rounded-xl object-cover"
                         alt="projects"
                       />
                     </div>

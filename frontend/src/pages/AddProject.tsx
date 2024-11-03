@@ -1,10 +1,13 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import toast, { Toaster } from "react-hot-toast";
+import { useNavigate } from "react-router-dom";
 import axiosInstance from "../axios/axiosInstance";
 import Container from "../components/Container";
+import Navbar from "../components/Navbar";
 import UploadThumbnail from "../components/UploadImage";
 
 export interface Project {
+  _id?: string;
   title: string;
   githubLink: string;
   liveSiteLink: string;
@@ -13,7 +16,7 @@ export interface Project {
   technologies: string[];
 }
 
-export default function AddProject() {
+export default function AddProject({ projectData }: any) {
   const [project, setProjects] = useState<Project>({
     title: "",
     githubLink: "",
@@ -37,6 +40,7 @@ export default function AddProject() {
       };
     });
   };
+  const navigate = useNavigate();
 
   const validateForm = (): boolean => {
     const validationErrors = [];
@@ -47,12 +51,12 @@ export default function AddProject() {
     if (!project.description) validationErrors.push("Description is required.");
     if (!project.technologies.length)
       validationErrors.push("At least one technology is required.");
-    if (!selectedFile) validationErrors.push("Thumbnail is required.");
 
     setErrors(validationErrors);
     return validationErrors.length === 0;
   };
 
+  // Adding a new project
   const handleCreateProject = async (
     event: React.MouseEvent<HTMLButtonElement, MouseEvent>
   ) => {
@@ -63,14 +67,12 @@ export default function AddProject() {
       });
       return;
     }
-    console.log({
-      ...project,
-      thumbnail: selectedFile,
-    });
     setIsLoading(true);
     try {
       const response = await axiosInstance.post("/create-project", project);
-      console.log(response.data);
+      if (response.status === 200) {
+        navigate("/dashboard");
+      }
       setIsLoading(false);
       toast.success("Project added successfully.", { position: "top-right" });
     } catch (error) {
@@ -79,11 +81,39 @@ export default function AddProject() {
     }
   };
 
+  // Update a project
+  const handleUpdateProject = async (
+    event: React.MouseEvent<HTMLButtonElement, MouseEvent>
+  ) => {
+    event.preventDefault();
+    if (!validateForm()) {
+      toast.error("Please fill in all required fields.", {
+        position: "top-right",
+      });
+      return;
+    }
+    console.log("first");
+  };
+
+  useEffect(() => {
+    if (projectData?._id) {
+      setProjects({
+        title: projectData?.title,
+        githubLink: projectData?.githubLink,
+        liveSiteLink: projectData?.liveSiteLink,
+        description: projectData?.description,
+        thumbnail: projectData.thumbnail?._id,
+        technologies: projectData?.technologies,
+      });
+    }
+  }, [projectData]);
+
   return (
     <div>
+      <Navbar />
       <Container>
         <Toaster />
-        <div className="mt-6">
+        <div className="mt-16">
           <form action="" className="flex flex-col">
             {errors.length > 0 && (
               <div className="text-red-500 mb-4">
@@ -217,12 +247,21 @@ export default function AddProject() {
 
                 {/* Submit Button */}
                 <div className="flex justify-center mt-6">
-                  <button
-                    className="py-2 px-8 rounded-xl bg-green-600 hover:bg-green-700 text-white"
-                    onClick={handleCreateProject}
-                  >
-                    {isLoading ? "Submitting..." : "Add Project"}
-                  </button>
+                  {projectData?._id ? (
+                    <button
+                      className="py-2 px-8 rounded-xl bg-green-600 hover:bg-green-700 text-white"
+                      onClick={handleUpdateProject}
+                    >
+                      Update project
+                    </button>
+                  ) : (
+                    <button
+                      className="py-2 px-8 rounded-xl bg-green-600 hover:bg-green-700 text-white"
+                      onClick={handleCreateProject}
+                    >
+                      {isLoading ? "Submitting..." : "Add Project"}
+                    </button>
+                  )}
                 </div>
               </div>
 
@@ -232,6 +271,7 @@ export default function AddProject() {
                   selectedFile={selectedFile}
                   setSelectedFile={setSelectedFile}
                   project={project}
+                  projectData={projectData}
                   setProjects={setProjects}
                 />
               </div>
