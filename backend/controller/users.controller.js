@@ -1,13 +1,11 @@
-import { configDotenv } from "dotenv";
-import jwt from "jsonwebtoken";
-import loginModel from "../model/user.model.js";
-configDotenv;
+const UserModel = require("../model/users.model");
+const jwt = require("jsonwebtoken");
 
 const Login = async (req, res) => {
   const credentials = req.body;
 
   try {
-    const user = await loginModel.findOne({ email: credentials?.email });
+    const user = await UserModel.findOne({ email: credentials?.email });
 
     if (!user) {
       return res.status(404).json({
@@ -75,7 +73,7 @@ const validateUser = async (req, res, next) => {
 const getUserInfo = async (req, res, next) => {
   try {
     const { email } = req.user;
-    const user = await loginModel.findOne({ email });
+    const user = await UserModel.findOne({ email });
     if (user && user?._id) {
       return res.status(200).json({
         message: "Valid user!",
@@ -100,4 +98,8 @@ function getCookieValue(cookie, name) {
   return null;
 }
 
-export { getUserInfo, Login, validateUser };
+module.exports = {
+  Login,
+  getUserInfo,
+  validateUser,
+};

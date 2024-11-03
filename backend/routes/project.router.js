@@ -1,15 +1,15 @@
-import { Router } from "express";
-import {
-  createProject,
-  deleteProject,
+const {
   getProjects,
   sendQueryEmail,
-} from "../controller/project.controller.js";
-import { validateUser } from "../controller/user.controller.js";
-const router = Router();
+  createProject,
+  deleteProject,
+} = require("../controller/project.controller");
+const { validateUser } = require("../controller/users.controller");
+const router = require("express").Router();
 
 router.get("/get-projects", getProjects);
 router.post("/send-email", sendQueryEmail);
 router.post("/create-project", validateUser, createProject);
 router.delete("/delete-project/:id", validateUser, deleteProject);
-export default router;
+
+module.exports = router;

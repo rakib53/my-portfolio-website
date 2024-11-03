@@ -1,13 +1,19 @@
-import nodemailer from "nodemailer";
-import smtpTransport from "nodemailer-smtp-transport";
-import ProjectModel from "../model/project.model.js";
+const nodemailer = require("nodemailer");
+const smtpTransport = require("nodemailer-smtp-transport");
+const { ProjectModel } = require("../model/project.model");
 
-export const getProjects = async (req, res) => {
-  const allProjects = await ProjectModel.find();
-  res.send(allProjects);
+// Get all the projects
+const getProjects = async (req, res, next) => {
+  try {
+    const allProjects = await ProjectModel.find();
+    res.send(allProjects);
+  } catch (error) {
+    next(error);
+  }
 };
 
-export const createProject = async (req, res, next) => {
+// Create a new project
+const createProject = async (req, res, next) => {
   const {
     title,
     description,
@@ -40,7 +46,8 @@ export const createProject = async (req, res, next) => {
   }
 };
 
-export const deleteProject = async (req, res) => {
+// Delete a project
+const deleteProject = async (req, res) => {
   const { id } = req.query;
 
   const deleteProject = await ProjectModel.deleteOne({ _id: id });
@@ -53,7 +60,7 @@ export const deleteProject = async (req, res) => {
   }
 };
 
-// send mail function
+// Send mail function
 const sendEmail = async (to, subject, html) => {
   const transporter = nodemailer.createTransport(
     smtpTransport({
@@ -75,6 +82,7 @@ const sendEmail = async (to, subject, html) => {
   return transporter.sendMail(mailOptions);
 };
 
+// Query template
 const queryEmailTemplate = (email, fullName, query) => {
   return `<!DOCTYPE html>
 <html lang="en">
@@ -154,7 +162,7 @@ const queryEmailTemplate = (email, fullName, query) => {
     <div class="container">
       <!-- Header -->
       <div class="header">
-        <h1>A new querry from ${fullName}</h1>
+        <h1>A new query from ${fullName}</h1>
       </div>
 
       <!-- Content -->
@@ -175,7 +183,8 @@ const queryEmailTemplate = (email, fullName, query) => {
 `;
 };
 
-export const sendQueryEmail = async (req, res, next) => {
+// Send mail endpoint
+const sendQueryEmail = async (req, res, next) => {
   try {
     const { email, fullName, query } = req.body;
 
@@ -195,4 +204,11 @@ export const sendQueryEmail = async (req, res, next) => {
   } catch (error) {
     res.status(500).json({ message: error?.message, error });
   }
+};
+
+module.exports = {
+  getProjects,
+  createProject,
+  deleteProject,
+  sendQueryEmail,
 };

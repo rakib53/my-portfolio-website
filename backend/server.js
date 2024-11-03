@@ -1,11 +1,13 @@
-import cookieParser from "cookie-parser";
-import cors from "cors";
-import express from "express";
-import "./config/database.js";
-import config from "./config/index.js";
-import projectRouter from "./route/project.route.js";
-import userRouter from "./route/user.route.js";
+const express = require("express");
 const app = express();
+const config = require("./config/config");
+require("./config/db");
+const cors = require("cors");
+const path = require("path");
+const cookieParser = require("cookie-parser");
+const UserRouter = require("./routes/user.router");
+const ProjectRouter = require("./routes/project.router");
+const UploadRouter = require("./routes/upload.router");
 
 // Middlewares
 app.use(express.json());
@@ -16,6 +18,7 @@ app.use(
     origin: (origin, callback) => {
       const whitelist = [
         "http://localhost:3000",
+        "http://localhost:5173",
         "https://www.rakib-dev.com",
         "http://www.rakib-dev.com",
         "https://rakib-dev.com",
@@ -31,13 +34,17 @@ app.use(
 );
 
 // User API
-app.use("/api/v1", userRouter);
-app.use("/api/v1", projectRouter);
+app.use("/api/v1", UserRouter);
+app.use("/api/v1", ProjectRouter);
+app.use("/api/v1", UploadRouter);
+
+// Middleware to handle static files (optional, for serving images)
+app.use("/uploads", express.static(path.join(__dirname, "uploads")));
 
 // Error Handling
 app.use((err, req, res, next) => {
   const statusCode = err.status || 500;
-  const message = err.message || "Something went wrong!";
+  const message = err.message || "Something went wrong!!";
   res.status(statusCode).json({ message });
 });
 

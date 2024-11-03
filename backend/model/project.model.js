@@ -1,30 +1,39 @@
-import mongoose from "mongoose";
+const mongoose = require("mongoose");
 
-const Project = mongoose.Schema({
-  title: {
-    type: String,
-    require: false,
+// Product Schema
+const ProjectsSchema = new mongoose.Schema(
+  {
+    title: {
+      type: String,
+      require: false,
+    },
+    liveSiteLink: {
+      type: String,
+      require: false,
+    },
+    githubLink: {
+      type: String,
+      require: false,
+    },
+    thumbnail: {
+      type: String,
+      require: false,
+    },
+    description: {
+      type: String,
+      require: false,
+    },
+    technologies: {
+      type: [String],
+      default: [],
+    },
   },
-  liveSiteLink: {
-    type: String,
-    require: false,
-  },
-  githubLink: {
-    type: String,
-    require: false,
-  },
-  thumbnail: {
-    type: String,
-    require: false,
-  },
-  description: {
-    type: String,
-    require: false,
-  },
-  technologies: {
-    type: [String],
-    default: [],
-  },
-});
+  {
+    timestamps: true,
+  }
+);
 
-export default mongoose.model("project", Project);
+// Exporting both models
+const ProjectModel = mongoose.model("Projects", ProjectsSchema);
+
+module.exports = { ProjectModel };
