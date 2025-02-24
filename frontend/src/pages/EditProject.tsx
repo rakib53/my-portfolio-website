@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import toast, { Toaster } from "react-hot-toast";
+import toast from "react-hot-toast";
 import { useParams } from "react-router-dom";
 import axiosInstance from "../axios/axiosInstance";
 import { ProjectInfo } from "../components/DashboardProject";
@@ -25,10 +25,7 @@ function EditProject() {
   }, [project_id]);
 
   return (
-    <div>
-      <Toaster />
-      <AddProject projectData={projectData} />
-    </div>
+    <AddProject projectData={projectData} setProjectData={setProjectData} />
   );
 }
 

@@ -9,7 +9,7 @@ const NavLogo = () => {
         src={logo}
         alt="Rakib Dev Logo"
       />
-      <h1 className="text-white text-2xl font-bold">DevCraft</h1>
+      <h1 className="text-white text-lg sm:text-2xl font-bold">DevCraft</h1>
     </NavLink>
   );
 };

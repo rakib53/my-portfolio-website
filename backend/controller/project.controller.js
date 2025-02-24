@@ -5,8 +5,23 @@ const { ProjectModel } = require("../model/project.model");
 // Get all the projects
 const getProjects = async (req, res, next) => {
   try {
-    const allProjects = await ProjectModel.find();
+    const allProjects = await ProjectModel.find().populate("thumbnail");
     res.send(allProjects);
+  } catch (error) {
+    next(error);
+  }
+};
+
+// Get a single projects
+const getProject = async (req, res, next) => {
+  const projectId = req.params.project_id;
+  try {
+    const projectDetails = await ProjectModel.findOne({
+      _id: projectId,
+    }).populate("thumbnail");
+    if (projectDetails) {
+      res.send(projectDetails);
+    }
   } catch (error) {
     next(error);
   }
@@ -39,6 +54,48 @@ const createProject = async (req, res, next) => {
     } else {
       res.status(400).json({
         error: "Error creating project!",
+      });
+    }
+  } catch (error) {
+    next(error);
+  }
+};
+
+// Edit project info
+const editProject = async (req, res, next) => {
+  const {
+    id,
+    title,
+    description,
+    liveSiteLink,
+    githubLink,
+    thumbnail,
+    technologies,
+  } = req?.body;
+
+  const project = {
+    title,
+    description,
+    liveSiteLink,
+    githubLink,
+    thumbnail,
+    technologies,
+  };
+  try {
+    const isUpdatedProject = await ProjectModel.findOneAndUpdate(
+      { _id: id },
+      project,
+      {
+        new: true,
+        runValidators: true,
+      }
+    );
+
+    if (isUpdatedProject?._id) {
+      res.status(200).json(isUpdatedProject);
+    } else {
+      res.status(400).json({
+        error: "Error updating project!",
       });
     }
   } catch (error) {
@@ -208,7 +265,9 @@ const sendQueryEmail = async (req, res, next) => {
 
 module.exports = {
   getProjects,
+  getProject,
   createProject,
+  editProject,
   deleteProject,
   sendQueryEmail,
 };

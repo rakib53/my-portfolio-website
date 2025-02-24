@@ -8,7 +8,7 @@ import WebsitePerformanceImage from "/services/website_performance_color.png";
 
 const Services = () => {
   return (
-    <section className="section-margin" id="service">
+    <section className="section-margin !px-4 sm:px-0" id="services">
       <Container>
         <h2 className="section-title">My Services</h2>
         <p className="section-description">

@@ -7,6 +7,7 @@ import "swiper/css/pagination";
 
 // import required modules
 import { useEffect, useState } from "react";
+import toast from "react-hot-toast";
 import { Pagination } from "swiper/modules";
 import TestimonialCard from "./TestimonialCard";
 
@@ -20,7 +21,7 @@ export default function TestimonialSlider() {
         const jsonData = await response.json();
         setTestimonials(jsonData);
       } catch (error) {
-        console.error("Error fetching data:", error);
+        toast.error("Error fetching projects");
       }
     };
 

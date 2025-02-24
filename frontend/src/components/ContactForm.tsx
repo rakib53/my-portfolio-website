@@ -1,8 +1,8 @@
 import { useState } from "react";
 import toast, { Toaster } from "react-hot-toast";
-import { BiPhoneCall } from "react-icons/bi";
-import { BsArrowRightShort } from "react-icons/bs";
-import { MdOutlineMarkEmailRead, MdOutlineWhatsapp } from "react-icons/md";
+// import { BiPhoneCall } from "react-icons/bi";
+// import { BsArrowRightShort } from "react-icons/bs";
+// import { MdOutlineMarkEmailRead, MdOutlineWhatsapp } from "react-icons/md";
 import { NavLink } from "react-router-dom";
 import axiosInstance from "../axios/axiosInstance";
 
@@ -56,7 +56,7 @@ export default function ContactForm() {
             </h3>
             <div className="flex flex-col gap-5">
               <div className="flex gap-1.5 flex-col items-center py-[25px] px-[30px] rounded-[4px] bg-primaryCardBG">
-                <MdOutlineMarkEmailRead className="w-[30px] h-[30px] text-text-color" />
+                {/* <MdOutlineMarkEmailRead className="w-[30px] h-[30px] text-text-color" /> */}
                 <h4 className="text-text-color font-inter font-medium">
                   Email
                 </h4>
@@ -64,11 +64,11 @@ export default function ContactForm() {
                   rakibdev53@gmail.com
                 </p>
                 <span className="flex items-center text-sm font-medium text-primary-color cursor-pointer font-monserrat">
-                  Write me <BsArrowRightShort className="w-[22px] h-[22px]" />
+                  {/* Write me <BsArrowRightShort className="w-[22px] h-[22px]" /> */}
                 </span>
               </div>
               <div className="flex gap-1.5 flex-col items-center py-[25px] px-[30px] rounded-[4px] bg-primaryCardBG">
-                <MdOutlineWhatsapp className="w-[30px] h-[30px] text-text-color" />
+                {/* <MdOutlineWhatsapp className="w-[30px] h-[30px] text-text-color" /> */}
                 <h4 className="text-text-color font-inter font-medium">
                   Whatsapp
                 </h4>
@@ -82,12 +82,12 @@ export default function ContactForm() {
                     className="flex items-center text-sm font-medium text-primary-color cursor-pointer font-monserrat"
                   >
                     Whatsapp me
-                    <BsArrowRightShort className="w-[22px] h-[22px]" />
+                    {/* <BsArrowRightShort className="w-[22px] h-[22px]" /> */}
                   </NavLink>
                 </span>
               </div>
               <div className="flex gap-1.5 flex-col items-center py-[25px] px-[30px] rounded-[4px] bg-primaryCardBG">
-                <BiPhoneCall className="w-[30px] h-[30px] text-text-color" />
+                {/* <BiPhoneCall className="w-[30px] h-[30px] text-text-color" /> */}
                 <h4 className="text-text-color font-inter font-medium">
                   Phone
                 </h4>
@@ -95,7 +95,8 @@ export default function ContactForm() {
                   +8801980551313
                 </p>
                 <span className="flex items-center text-sm font-medium text-primary-color cursor-pointer font-monserrat">
-                  Call me <BsArrowRightShort className="w-[22px] h-[22px]" />
+                  Call me
+                  {/* <BsArrowRightShort className="w-[22px] h-[22px]" /> */}
                 </span>
               </div>
             </div>

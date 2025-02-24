@@ -30,7 +30,7 @@ const Navbar: React.FC = () => {
 
   return (
     <div className="px-4 pt-5">
-      <div className="max-w-[1440px] w-full mx-auto h-[60px] rounded-full px-[40px] py-[10px] bg-[var(--navbar-bg)] flex items-center justify-between font-inter overflow-hidden">
+      <div className="max-w-[1440px] w-full mx-auto h-[60px] rounded-full px-[40px] py-[10px] glass-effect flex items-center justify-between font-inter overflow-hidden">
         <NavLogo />
         <div
           className={`fixed md:static p-5 md:p-0 ${
@@ -52,6 +52,11 @@ const Navbar: React.FC = () => {
               </li>
             )}
             <li className="p-[10px_20px] bg-[#525252] md:bg-transparent text-center rounded-[5px] transition-all duration-500 hover:bg-[#8a8686] md:hover:bg-transparent cursor-pointer">
+              <a href="#services" className="text-white text-[16px]">
+                Services
+              </a>
+            </li>
+            <li className="p-[10px_20px] bg-[#525252] md:bg-transparent text-center rounded-[5px] transition-all duration-500 hover:bg-[#8a8686] md:hover:bg-transparent cursor-pointer">
               <a href="#skills" className="text-white text-[16px]">
                 Skills
               </a>
@@ -66,12 +71,12 @@ const Navbar: React.FC = () => {
                 Testimonial
               </a>
             </li>
-            <li className="p-[10px_20px] bg-[#525252] md:bg-transparent text-center rounded-[5px] transition-all duration-500 hover:bg-[#8a8686] md:hover:bg-transparent cursor-pointer">
+            {/* <li className="p-[10px_20px] bg-[#525252] md:bg-transparent text-center rounded-[5px] transition-all duration-500 hover:bg-[#8a8686] md:hover:bg-transparent cursor-pointer">
               <a href="#about" className="text-white text-[16px]">
                 About me
               </a>
-            </li>
-            <li className="p-[10px_20px] bg-[#525252] md:bg-transparent text-center rounded-[5px] transition-all duration-500 hover:bg-[#8a8686] md:hover:bg-transparent cursor-pointer">
+            </li> */}
+            {/* <li className="p-[10px_20px] bg-[#525252] md:bg-transparent text-center rounded-[5px] transition-all duration-500 hover:bg-[#8a8686] md:hover:bg-transparent cursor-pointer">
               <a
                 href="https://drive.google.com/file/d/1eC6_lOj0bZegZKN5wlPWeXPxA_t3ki8n/view?usp=drive_link"
                 target="_blank"
@@ -79,12 +84,7 @@ const Navbar: React.FC = () => {
               >
                 Resume
               </a>
-            </li>
-            <li className="p-[10px_20px] bg-[#525252] md:bg-transparent text-center rounded-[5px] transition-all duration-500 hover:bg-[#8a8686] md:hover:bg-transparent cursor-pointer">
-              <NavLink to="/login" className="text-white text-[16px]">
-                login
-              </NavLink>
-            </li>
+            </li> */}
           </ul>
           <div className="block md:hidden mt-5">
             <a
@@ -97,9 +97,16 @@ const Navbar: React.FC = () => {
         </div>
 
         <div className="hidden md:block">
-          <a
+          {/* <a
             href="#contact"
             className="rounded-full py-3 px-[30px] text-white text-[16px] font-medium bg-[var(--navbarButton-bg)] border border-[#868181] transition-all duration-300 ease-in-out hover:border-[var(--primary-color)]"
+          >
+            Contact Me
+          </a> */}
+
+          <a
+            href="#contact"
+            className="px-6 py-2 bg-blue-600 text-white rounded-full font-semibold hover:bg-blue-700 transition-colors shadow-lg shadow-blue-500/20"
           >
             Contact Me
           </a>
@@ -113,21 +120,21 @@ const Navbar: React.FC = () => {
             className={`${
               isExpand
                 ? "translate-y-[5px] rotate-[45deg]"
-                : "block w-full h-[3px] bg-white my-1.5 rounded transition-all duration-500"
+                : "block w-full h-[3px] bg-white my-1 rounded transition-all duration-500"
             }`}
           ></span>
           <span
             className={`${
               isExpand
                 ? "hidden"
-                : "block w-full h-[3px] bg-white my-1.5 rounded transition-all duration-500"
+                : "block w-full h-[3px] bg-white my-1 rounded transition-all duration-500"
             }`}
           ></span>
           <span
             className={`${
               isExpand
                 ? "translate-y-[-4px] rotate-[135deg]"
-                : "block w-full h-[3px] bg-white my-1.5 rounded transition-all duration-500"
+                : "block w-full h-[3px] bg-white my-1 rounded transition-all duration-500"
             }`}
           ></span>
         </div>

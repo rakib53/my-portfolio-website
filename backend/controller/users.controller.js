@@ -15,7 +15,7 @@ const Login = async (req, res) => {
 
     if (user?.password !== credentials?.password) {
       return res.status(404).json({
-        message: "password dosen't match!",
+        message: "password doesn't match!",
       });
     }
 

@@ -16,8 +16,8 @@ const ProjectsSchema = new mongoose.Schema(
       require: false,
     },
     thumbnail: {
-      type: String,
-      require: false,
+      type: mongoose.Schema.ObjectId,
+      ref: "Files",
     },
     description: {
       type: String,

@@ -38,8 +38,8 @@ app.use("/api/v1", UserRouter);
 app.use("/api/v1", ProjectRouter);
 app.use("/api/v1", UploadRouter);
 
-// Middleware to handle static files (optional, for serving images)
-app.use("/uploads", express.static(path.join(__dirname, "uploads")));
+// Serve static files from the "files" directory
+app.use("/files", express.static(path.join(__dirname, "files")));
 
 // Error Handling
 app.use((err, req, res, next) => {

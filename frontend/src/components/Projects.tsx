@@ -1,8 +1,9 @@
 import { useEffect, useState } from "react";
+import toast from "react-hot-toast";
 import { BsGithub } from "react-icons/bs";
 import { NavLink } from "react-router-dom";
 import axiosInstance from "../axios/axiosInstance";
-import ProjectHeader from "./ProjectHeader";
+import domain from "../helper/DynamicDomain";
 import TechnologyCard from "./TechnologyCard";
 
 export default function Projects() {
@@ -16,7 +17,7 @@ export default function Projects() {
           setProjects(response.data);
         }
       } catch (error) {
-        console.error("Error fetching projects:", error);
+        toast.error("Error fetching projects");
       }
     };
 
@@ -24,15 +25,15 @@ export default function Projects() {
   }, []);
 
   return (
-    <section className="section-margin" id="projects">
+    <section className="section-margin !px-4 sm:px-0" id="projects">
       {projects?.length > 0 && (
         <div className="container">
           <h2 className="section-title">Projects</h2>
           <p className="section-description">
             Discover my journey of creativity through these Projects.
           </p>
-          <ProjectHeader />
-          <div className="w-full grid items-stretch gap-8 grid-cols-[repeat(auto-fit,minmax(370px,1fr))]">
+          {/* <ProjectHeader /> */}
+          <div className="w-full grid items-stretch gap-8 grid-cols-[repeat(auto-fit,minmax(300px,1fr))] sm:grid-cols-[repeat(auto-fit,minmax(370px,1fr))]">
             {projects?.map((project: any, index: number) => {
               return (
                 <div
@@ -54,7 +55,7 @@ export default function Projects() {
                   <NavLink to={project?.liveSiteLink} target=" ">
                     <div className="w-full">
                       <img
-                        src={`http://localhost:5000${project?.thumbnail?.destination}`}
+                        src={`${domain}${project?.thumbnail?.destination}`}
                         className="w-full h-[200px] rounded-xl object-cover"
                         alt="projects"
                       />

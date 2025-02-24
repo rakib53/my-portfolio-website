@@ -18,7 +18,7 @@ const uploadThumbnail = async (req, res, next) => {
     if (isFileUploaded) {
       res.status(200).json({
         message: "File uploaded successfully!",
-        filePath: `/uploads/${req.file.filename}`,
+        fileId: isFileUploaded?._id,
       });
     } else {
       res.status(404).json({

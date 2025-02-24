@@ -2,7 +2,7 @@ import Container from "./Container";
 
 const WorkExperience = () => {
   return (
-    <section className="w-full section-margin">
+    <section className="w-full section-margin !px-4 sm:px-0">
       <Container>
         <h2 className="section-title">Experiences</h2>
         <p className="section-description">

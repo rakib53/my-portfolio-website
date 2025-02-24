@@ -16,7 +16,7 @@ export interface Project {
   technologies: string[];
 }
 
-export default function AddProject({ projectData }: any) {
+export default function AddProject({ projectData, setProjectData }: any) {
   const [project, setProjects] = useState<Project>({
     title: "",
     githubLink: "",
@@ -27,6 +27,7 @@ export default function AddProject({ projectData }: any) {
   });
   const [isLoading, setIsLoading] = useState(false);
   const [selectedFile, setSelectedFile] = useState<File | null>(null);
+  const [isUploaded, setIsUploaded] = useState(false);
   const [errors, setErrors] = useState<string[]>([]);
 
   const handleSetFilterStack = (value: string) => {
@@ -81,18 +82,40 @@ export default function AddProject({ projectData }: any) {
     }
   };
 
+  // Removing uploaded images
+  const handleRemovePhoto = () => {
+    setSelectedFile(null);
+    setProjectData({ ...projectData, thumbnail: "" });
+    setIsUploaded(false);
+  };
+
   // Update a project
   const handleUpdateProject = async (
     event: React.MouseEvent<HTMLButtonElement, MouseEvent>
   ) => {
     event.preventDefault();
+    setIsLoading(true);
     if (!validateForm()) {
       toast.error("Please fill in all required fields.", {
         position: "top-right",
       });
       return;
     }
-    console.log("first");
+    try {
+      const response = await axiosInstance.patch("/edit-project", {
+        id: projectData?._id,
+        ...project,
+      });
+      if (response.status === 200) {
+        setIsLoading(false);
+        toast.success("Project updated successfully.", {
+          position: "top-right",
+        });
+      }
+    } catch (error) {
+      setIsLoading(false);
+      toast.error("Error while updating project", { position: "top-right" });
+    }
   };
 
   useEffect(() => {
@@ -106,6 +129,8 @@ export default function AddProject({ projectData }: any) {
         technologies: projectData?.technologies,
       });
     }
+    setSelectedFile(projectData?.thumbnail);
+    setIsUploaded(true);
   }, [projectData]);
 
   return (
@@ -273,6 +298,9 @@ export default function AddProject({ projectData }: any) {
                   project={project}
                   projectData={projectData}
                   setProjects={setProjects}
+                  isUploaded={isUploaded}
+                  setIsUploaded={setIsUploaded}
+                  handleRemovePhoto={handleRemovePhoto}
                 />
               </div>
             </div>

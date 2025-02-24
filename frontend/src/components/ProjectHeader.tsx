@@ -9,6 +9,7 @@ export default function ProjectHeader() {
 
   return (
     <div className="flex items-center justify-start gap-8 mb-6">
+      <span className="hidden">{filterStack}</span>
       <span
         className="text-[#ccd6f6] text-base inline-block py-2.5 px-5 rounded-[20px] bg-[#112240]"
         onClick={() => handleSetFilterStack("react-js")}

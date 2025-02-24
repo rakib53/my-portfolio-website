@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import toast from "react-hot-toast";
 import axiosInstance from "../axios/axiosInstance";
+import domain from "../helper/DynamicDomain";
 import { Project } from "../pages/AddProject";
 import { ProjectInfo } from "./DashboardProject";
 
@@ -10,6 +11,9 @@ interface UploadThumbnailProps {
   setProjects: React.Dispatch<React.SetStateAction<Project>>;
   setSelectedFile: React.Dispatch<React.SetStateAction<File | null>>;
   projectData: ProjectInfo;
+  isUploaded: boolean;
+  setIsUploaded: React.Dispatch<React.SetStateAction<boolean>>;
+  handleRemovePhoto: any;
 }
 
 const UploadThumbnail = ({
@@ -18,9 +22,11 @@ const UploadThumbnail = ({
   setProjects,
   setSelectedFile,
   projectData,
+  isUploaded,
+  setIsUploaded,
+  handleRemovePhoto,
 }: UploadThumbnailProps) => {
   const [isLoading, setIsLoading] = useState(false);
-  const [isUploaded, setIsUploaded] = useState(false);
   const [preview, setPreview] = useState("");
 
   // Select the file to upload
@@ -29,6 +35,7 @@ const UploadThumbnail = ({
 
     if (file) {
       setSelectedFile(file || null);
+      setIsUploaded(false);
       // Create a URL for preview
       const reader = new FileReader();
       reader.onloadend = () => {
@@ -36,11 +43,6 @@ const UploadThumbnail = ({
       };
       reader.readAsDataURL(file);
     }
-  };
-
-  // Removing uploaded images
-  const handleRemovePhoto = () => {
-    setSelectedFile(null);
   };
 
   // Upload file to the server
@@ -88,7 +90,7 @@ const UploadThumbnail = ({
         >
           Attachment
         </label>
-        {projectData?._id ? (
+        {projectData?.thumbnail ? (
           <div className="mt-2 !w-[300px] relative bg-primaryCardBG py-4 rounded-xl">
             {/* Remove file icon  */}
             <span
@@ -109,7 +111,7 @@ const UploadThumbnail = ({
             </span>
             <div className="w-full flex flex-col gap-2">
               <img
-                src={`http://localhost:5000${projectData?.thumbnail?.destination}`}
+                src={`${domain}${projectData?.thumbnail?.destination}`}
                 alt="Selected preview"
                 className="w-full h-[100px] object-contain"
               />
