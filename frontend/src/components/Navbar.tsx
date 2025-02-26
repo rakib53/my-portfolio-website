@@ -63,7 +63,7 @@ const Navbar: React.FC = () => {
             </li>
             <li className="p-[10px_20px] bg-[#525252] md:bg-transparent text-center rounded-[5px] transition-all duration-500 hover:bg-[#8a8686] md:hover:bg-transparent cursor-pointer">
               <a href="#projects" className="text-white text-[16px]">
-                Projectsssss
+                Projects
               </a>
             </li>
             <li className="p-[10px_20px] bg-[#525252] md:bg-transparent text-center rounded-[5px] transition-all duration-500 hover:bg-[#8a8686] md:hover:bg-transparent cursor-pointer">
