@@ -177,7 +177,7 @@ function Banner() {
 
       {/* Scroll indicator - Hidden on mobile */}
       <div className="hidden md:flex absolute bottom-4 left-1/2 transform -translate-x-1/2 flex-col items-center gap-2 z-10">
-        <span className="text-sm text-blue-200/60">Scroll down</span>
+        <span className="text-sm text-blue-200/50">Scroll down</span>
         <ChevronDown className="w-6 h-6 animate-bounce text-blue-400" />
       </div>
 
