@@ -1,10 +1,10 @@
-import { useState } from "react";
+import emailjs from "@emailjs/browser";
+import { useRef, useState } from "react";
 import toast, { Toaster } from "react-hot-toast";
 import { BiPhoneCall } from "react-icons/bi";
 import { BsArrowRightShort } from "react-icons/bs";
 import { MdOutlineMarkEmailRead, MdOutlineWhatsapp } from "react-icons/md";
 import { NavLink } from "react-router-dom";
-import axiosInstance from "../axios/axiosInstance";
 
 export default function ContactForm() {
   const [isLoading, setIsLoading] = useState(false);
@@ -13,6 +13,7 @@ export default function ContactForm() {
     email: "",
     query: "",
   });
+  const form = useRef<HTMLFormElement>(null);
 
   const handleQuerySubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
@@ -31,14 +32,32 @@ export default function ContactForm() {
 
     setIsLoading(true);
 
-    try {
-      await axiosInstance.post("/send-email", queryData);
+    if (form.current) {
+      emailjs
+        .sendForm(
+          "service_95sk5ai",
+          "template_hgdoimb",
+          form.current,
+          "uPXsGs9-DiZR9pBHV"
+        )
+        .then((result: any) => {
+          setIsLoading(false);
+          toast.success("Query submitted", { position: "top-right" });
+          console.log(result.text);
+        })
+        .catch((error: any) => {
+          setIsLoading(false);
+          toast.error("Error sending query submitted", {
+            position: "top-right",
+          });
+          console.log(error.text);
+        });
+    } else {
       setIsLoading(false);
-      toast.success("Query submitted", { position: "top-right" });
-    } catch (error) {
-      setIsLoading(false);
-      toast.error("Error sending query submitted", { position: "top-right" });
+      toast.error("Form reference is not available", { position: "top-right" });
     }
+
+    (e.target as HTMLFormElement).reset();
   };
 
   return (
@@ -107,21 +126,23 @@ export default function ContactForm() {
             </h3>
             <form
               className="w-full flex flex-col gap-8"
+              ref={form}
               onSubmit={handleQuerySubmit}
             >
               <div>
                 <div className="relative">
                   <label
-                    htmlFor="fullName"
+                    htmlFor="to_name"
                     className="text-sm absolute -top-2 left-4 text-text-color bg-bg-color"
                   >
                     Full Name*
                   </label>
                   <input
                     type="text"
-                    id="fullName"
+                    id="to_name"
+                    name="to_name"
                     className="w-full block outline-none text-text-color rounded border border-text-color bg-transparent hover:bg-primaryCardBG font-inter p-4 duration-200"
-                    placeholder="Enter your name"
+                    placeholder="Enter your fullname"
                     value={queryData.fullName}
                     onChange={(e) => {
                       setQueryData({
@@ -136,14 +157,15 @@ export default function ContactForm() {
               <div>
                 <div className="relative">
                   <label
-                    htmlFor="email"
+                    htmlFor="from_name"
                     className="text-sm absolute -top-2 left-4 text-text-color bg-bg-color"
                   >
                     Email*
                   </label>
                   <input
                     type="email"
-                    id="email"
+                    id="from_name"
+                    name="from_name"
                     className="w-full block outline-none text-text-color rounded border border-text-color !bg-transparent hover:bg-primaryCardBG font-inter p-4 duration-200 !fill-transparent"
                     placeholder="Enter your email"
                     value={queryData.email}
@@ -160,14 +182,14 @@ export default function ContactForm() {
               <div>
                 <div className="relative">
                   <label
-                    htmlFor="query"
+                    htmlFor="message"
                     className="text-sm absolute -top-2 left-4 text-text-color bg-bg-color"
                   >
-                    Query
+                    Message
                   </label>
                   <textarea
-                    name=""
-                    id="query"
+                    name="message"
+                    id="message"
                     cols={30}
                     rows={10}
                     className="w-full block outline-none text-text-color rounded border border-text-color bg-transparent hover:bg-primaryCardBG font-inter p-4 duration-200"

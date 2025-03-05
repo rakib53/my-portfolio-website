@@ -1,13 +1,14 @@
 import { useEffect, useRef, useState } from "react";
 import { NavLink } from "react-router-dom";
-import useAuth from "../hooks/useAuth";
 import NavLogo from "./NavLogo";
 
 const Navbar: React.FC = () => {
   const [isExpand, setIsExpand] = useState<boolean>(false);
   const expandMenuRef = useRef<HTMLDivElement>(null);
   const hamburgerMenuRef = useRef<HTMLDivElement>(null);
-  const { user } = useAuth(); // Assuming `user` has a specific structure
+  const user = {
+    email: null,
+  };
 
   const handleExpandMenu = () => {
     setIsExpand(!isExpand);
