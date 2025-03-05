@@ -40,17 +40,15 @@ export default function ContactForm() {
           form.current,
           "uPXsGs9-DiZR9pBHV"
         )
-        .then((result: any) => {
+        .then(() => {
           setIsLoading(false);
           toast.success("Query submitted", { position: "top-right" });
-          console.log(result.text);
         })
-        .catch((error: any) => {
+        .catch(() => {
           setIsLoading(false);
           toast.error("Error sending query submitted", {
             position: "top-right",
           });
-          console.log(error.text);
         });
     } else {
       setIsLoading(false);
